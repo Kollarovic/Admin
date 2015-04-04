@@ -24,7 +24,7 @@ class LoginControl extends Control
 {
 
 	/** @var array */
-	public $onLoginIn;
+	public $onLoggedIn;
 
 	/** @var string */
 	private $templateFile;
@@ -88,7 +88,7 @@ class LoginControl extends Control
 	{
 		$form = $this->loginFormFactory->create();
 		$form->onSuccess[] = function($form) {
-			$this->onLoginIn($form);
+			$this->onLoggedIn($form);
 		};
 		return $form;
 	}
