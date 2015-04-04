@@ -108,7 +108,7 @@ class SignPresenter extends Presenter
     protected function createComponentLoginControl()
     {
         $loginControl = $this->loginControlFactory->create();
-        $loginControl->onLoginIn[] = function() {
+        $loginControl->onLoggedIn[] = function() {
             $this->redirect('Homepage:default');
         };
         return $loginControl;
