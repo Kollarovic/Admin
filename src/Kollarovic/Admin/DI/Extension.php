@@ -55,10 +55,13 @@ class Extension extends Nette\DI\CompilerExtension
 		}
 
 		$builder->addDefinition($this->prefix('formRender'))
-			->setClass('Nextras\Forms\Rendering\Bs3FormRenderer');
+			->setClass('Nextras\Forms\Rendering\Bs3FormRenderer')
+			->setAutowired(FALSE);
 
 		$builder->addDefinition($this->prefix('baseFormFactory'))
-			->setClass('Kollarovic\Admin\Form\BaseFormFactory');
+			->setClass('Kollarovic\Admin\Form\BaseFormFactory', [
+				'formRender' => $this->prefix('@formRender')
+			]);
 
 		$builder->addDefinition($this->prefix('loginFormFactory'))
 			->setClass('Kollarovic\Admin\LoginFormFactory');
