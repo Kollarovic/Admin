@@ -20,6 +20,7 @@ use Nette\Security\User;
  * @method AdminControl setContent(string $content)
  * @method AdminControl setHeader(string $header)
  * @method AdminControl setFooter(string $footer)
+ * @method AdminControl setNavbar(string $navbar)
  * @method AdminControl setNavigationName(string $navigationName)
  * @method AdminControl setProfileUrl(string $profileUrl)
  *
@@ -33,6 +34,7 @@ use Nette\Security\User;
  * @method string getContent()
  * @method string getHeader()
  * @method string getFooter()
+ * @method string getNavbar()
  * @method string getNavigationName()
  * @method string getProfileUrl()
  */
@@ -85,6 +87,9 @@ class AdminControl extends Control
 	private $footer;
 
 	/** @var string */
+	private $navbar;
+
+	/** @var string */
 	private $navigationName;
 
 	/** @var string */
@@ -113,6 +118,7 @@ class AdminControl extends Control
 		$this->template->content = $this->content;
 		$this->template->header = $this->header;
 		$this->template->footer = $this->footer;
+		$this->template->navbar = $this->navbar;
 		$this->template->rootItem = $this->getRootItem();
 		foreach ($options as $key => $value) {
 			$this->template->$key = $value;
