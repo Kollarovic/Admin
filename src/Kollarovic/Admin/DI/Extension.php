@@ -17,6 +17,7 @@ class Extension extends Nette\DI\CompilerExtension
 			'name' => 'Admin',
 			'skin' => 'red',
 			'footer' => '',
+			'ajax' => FALSE,
 			'defaultFiles' => [
 				'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css',
 				'https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css',
@@ -79,7 +80,8 @@ class Extension extends Nette\DI\CompilerExtension
 			->addSetup('setSkin', [$config['skin']])
 			->addSetup('setAdminName', [$config['name']])
 			->addSetup('setNavigationName', [$config['navigation']])
-			->addSetup('setFooter', [$config['footer']]);
+			->addSetup('setFooter', [$config['footer']])
+			->addSetup('setAjaxRequest', [$config['ajax']]);
 	}
 
 }

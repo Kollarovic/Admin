@@ -19,7 +19,7 @@
 <body class="skin-{$skin}">
 	<div class="wrapper">
 		<header class="main-header">
-			<a href="{plink $rootItem->link}" class="logo">{_$adminName}</a>
+			<a href="{plink $rootItem->link}" n:class="logo,$ajax ? ajax">{_$adminName}</a>
 			<nav class="navbar navbar-static-top" role="navigation" n:block="navbar">
 				<a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
 					<span class="sr-only">{_'Toggle navigation'}</span>
@@ -42,7 +42,7 @@
 								</li>
 								<li class="user-footer">
 									<div class="pull-left" n:if="$profileUrl">
-										<a href="{$profileUrl}" class="btn btn-default btn-flat">{_'Profile'}</a>
+										<a href="{$profileUrl}" n:class="$ajax ? ajax,btn,btn-default,btn-flat">{_'Profile'}</a>
 									</div>
 									<div class="pull-right">
 										<a n:href="signOut" class="btn btn-default btn-flat">{_'Sign out'}</a>
@@ -66,20 +66,24 @@
 						</span>
 					</div>
 				{/form}
-				{block menu}{control navigation:menu class => 'sidebar-menu', subclass => 'treeview-menu', openClass => 'active', open => TRUE}{/block}
+				{snippet menu}
+					{block menu}{control navigation:menu class => 'sidebar-menu', subclass => 'treeview-menu', openClass => 'active', open => TRUE, ajax => $ajax}{/block}
+				{/snippet}
 			</section>
 		</aside>
 
 		<div class="content-wrapper">
-			<section class="content-header">
-			<h1>{if $pageName}{$pageName}{else}{control navigation:title}{/if}</h1>
-			{block breadcrumb}{control navigation:breadcrumb}{/block}
+			<section class="content-header" n:snippet="breadcrumb">
+				<h1>{if $pageName}{$pageName}{else}{control navigation:title}{/if}</h1>
+				{block breadcrumb}{control navigation:breadcrumb ajax => $ajax}{/block}
 			</section>
 			<section class="content">
-				<div n:foreach="$presenter->template->flashes as $flash" class="alert alert-{$flash->type} fade in" n:block="flashes">
-					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-					{_$flash->message}
-				</div>
+				{snippet flash}
+					<div n:foreach="$presenter->template->flashes as $flash" class="alert alert-{$flash->type} fade in" n:block="flashes">
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+						{_$flash->message}
+					</div>
+				{/snippet}
 				{$content|noescape}
 			</section>
 		</div>

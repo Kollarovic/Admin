@@ -23,6 +23,7 @@ use Nette\Security\User;
  * @method AdminControl setNavbar(string $navbar)
  * @method AdminControl setNavigationName(string $navigationName)
  * @method AdminControl setProfileUrl(string $profileUrl)
+ * @method AdminControl setAjaxRequest($ajaxRequest)
  *
  * @method string getTemplateFile()
  * @method string getPageTitle()
@@ -37,6 +38,7 @@ use Nette\Security\User;
  * @method string getNavbar()
  * @method string getNavigationName()
  * @method string getProfileUrl()
+ * @method boolean isAjaxRequest()
  */
 class AdminControl extends Control
 {
@@ -95,6 +97,9 @@ class AdminControl extends Control
 	/** @var string */
 	private $profileUrl;
 
+	/** @var boolean */
+	private $ajaxRequest = FALSE;
+
 
 	function __construct(ItemsFactory $itemsFactory, ILoaderFactory $loaderFactory, User $user)
 	{
@@ -119,6 +124,7 @@ class AdminControl extends Control
 		$this->template->header = $this->header;
 		$this->template->footer = $this->footer;
 		$this->template->navbar = $this->navbar;
+		$this->template->ajax = $this->ajaxRequest;
 		$this->template->rootItem = $this->getRootItem();
 		foreach ($options as $key => $value) {
 			$this->template->$key = $value;
