@@ -6,19 +6,8 @@ use Nette\Application\UI\Control;
 
 
 /**
- * @method LoginControl setTemplateFile(string $templateFile)
- * @method LoginControl setPageTitle(string $pageTitle)
- * @method LoginControl setPageName(string $pageName)
- * @method LoginControl setPageMsg(string $pageMsg)
- * @method LoginControl setUsernameIcon(string $usernameIcon)
- * @method LoginControl setPasswordIcon(string $passwordIcon)
- *
- * @method string getTemplateFile()
- * @method string getPageTitle()
- * @method string getPageName()
- * @method string getPageMsg()
- * @method string getUsernameIcon()
- * @method string getPasswordIcon()
+ * Class LoginControl
+ * @package Kollarovic\Admin
  */
 class LoginControl extends Control
 {
@@ -104,5 +93,55 @@ class LoginControl extends Control
 	{
 		return $this->loaderFactory->createJavaScriptLoader();
 	}
+
+    public function setTemplateFile($templateFile)
+    {
+        $this->templateFile = $templateFile;
+    }
+    public function setPageTitle($pageTitle)
+    {
+        $this->pageTitle = $pageTitle;
+    }
+    public function setPageName($pageName)
+    {
+        $this->pageName = $pageName;
+    }
+    public function setPageMsg($pageMsg)
+    {
+        $this->pageMsg = $pageMsg;
+    }
+    public function setUsernameIcon($usernameIcon)
+    {
+        $this->usernameIcon = $usernameIcon;
+    }
+    public function setPasswordIcon($passwordIcon)
+    {
+        $this->passwordIcon = $passwordIcon;
+    }
+
+    public function getTemplateFile()
+    {
+        return $this->templateFile;
+    }
+    public function getPageTitle()
+    {
+        return $this->pageTitle;
+    }
+    public function getPageName()
+    {
+        return $this->pageName;
+    }
+    public function getPageMsg()
+    {
+        return $this->pageMsg;
+    }
+    public function getUsernameIcon()
+    {
+        return $this->usernameIcon;
+    }
+    public function getPasswordIcon()
+    {
+        return $this->passwordIcon;
+    }
 
 }

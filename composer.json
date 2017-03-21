@@ -13,8 +13,8 @@
 
 	"require": {
 		"php": ">=5.4.0",
-		"nette/nette": "~2.3",
-		"kollarovic/navigation": "~1.0.0",
+		"nette/nette": "~2.4",
+		"chapcz/navigation": "~1.0.0",
 		"janmarek/webloader": "~2.4.0",
 		"nextras/forms": "~1.4.1"
 	},

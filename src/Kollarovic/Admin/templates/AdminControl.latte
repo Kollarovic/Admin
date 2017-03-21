@@ -6,7 +6,7 @@
 {if $pageTitle}
 	<title>{$pageTitle}</title>
 {else}
-	<title>{control navigation:title} - {_$adminName}</title>
+	<title>{control navigation:title} - {$adminName|translate}</title>
 {/if}
 	{control css}
 	<link rel="shortcut icon" href="{$basePath}/favicon.ico">
@@ -14,12 +14,12 @@
 		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	<![endif]-->
-	{_$header|noescape}
+	{$header|noescape|translate}
 </head>
 <body class="skin-{$skin}">
 	<div class="wrapper">
 		<header class="main-header">
-			<a href="{plink $rootItem->link}" n:class="logo,$ajax ? ajax">{_$adminName}</a>
+			<a href="{plink $rootItem->link}" n:class="logo,$ajax ? ajax">{$adminName|translate}</a>
 			<nav class="navbar navbar-static-top" role="navigation" n:block="navbar">
 				<a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
 					<span class="sr-only">{_'Toggle navigation'}</span>
@@ -81,14 +81,14 @@
 				{snippet flash}
 					<div n:foreach="$presenter->template->flashes as $flash" class="alert alert-{$flash->type} fade in" n:block="flashes">
 						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-						{_$flash->message}
+						{$flash->message|translate}
 					</div>
 				{/snippet}
 				{$content|noescape}
 			</section>
 		</div>
 		<footer class="main-footer" n:block="footer">
-		{_$footer|noescape}
+		{$footer|noescape|translate}
 		</footer>
 	</div>
 	{block scripts}

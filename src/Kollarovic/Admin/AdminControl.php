@@ -10,35 +10,8 @@ use Nette\Security\User;
 
 
 /**
- * @method AdminControl setTemplateFile(string $templateFile)
- * @method AdminControl setPageTitle(string $pageTitle)
- * @method AdminControl setSkin(string $skin)
- * @method AdminControl setAdminName(string $adminName)
- * @method AdminControl setUserName(string $userName)
- * @method AdminControl setUserImage(string $userImage)
- * @method AdminControl setPageName(string $pageName)
- * @method AdminControl setContent(string $content)
- * @method AdminControl setHeader(string $header)
- * @method AdminControl setFooter(string $footer)
- * @method AdminControl setNavbar(string $navbar)
- * @method AdminControl setNavigationName(string $navigationName)
- * @method AdminControl setProfileUrl(string $profileUrl)
- * @method AdminControl setAjaxRequest($ajaxRequest)
- *
- * @method string getTemplateFile()
- * @method string getPageTitle()
- * @method string getSkin()
- * @method string getAdminName()
- * @method string getUserName()
- * @method string getUserImage()
- * @method string getPageName()
- * @method string getContent()
- * @method string getHeader()
- * @method string getFooter()
- * @method string getNavbar()
- * @method string getNavigationName()
- * @method string getProfileUrl()
- * @method boolean isAjaxRequest()
+ * Class AdminControl
+ * @package Kollarovic\Admin
  */
 class AdminControl extends Control
 {
@@ -190,4 +163,118 @@ class AdminControl extends Control
 		return $this->itemsFactory->create($this->navigationName);
 	}
 
+    public function setTemplateFile($templateFile)
+    {
+        $this->templateFile = $templateFile;
+    }
+    public function setPageTitle($pageTitle)
+    {
+        $this->pageTitle = $pageTitle;
+    }
+    public function setSkin($skin)
+    {
+        $this->skin = $skin;
+    }
+    public function setAdminName($adminName)
+    {
+        $this->adminName = $adminName;
+    }
+    public function setUserName( $userName)
+    {
+        $this->userName = $userName;
+    }
+    public function setUserImage( $userImage)
+    {
+        $this->userImage = $userImage;
+    }
+    public function setPageName( $pageName)
+    {
+        $this->pageName = $pageName;
+    }
+    public function setContent( $content)
+    {
+        $this->content = $content;
+    }
+    public function setHeader( $header)
+    {
+        $this->header = $header;
+    }
+    public function setFooter( $footer)
+    {
+        $this->footer = $footer;
+    }
+    public function setNavbar( $navbar)
+    {
+        $this->navbar = $navbar;
+    }
+    public function setNavigationName( $navigationName)
+    {
+        $this->navigationName = $navigationName;
+    }
+    public function setProfileUrl( $profileUrl)
+    {
+        $this->profileUrl = $profileUrl;
+    }
+    public function setAjaxRequest($ajaxRequest)
+    {
+        $this->ajaxRequest = $ajaxRequest;
+    }
+
+
+    public function getTemplateFile()
+    {
+        return $this->templateFile;
+    }
+    public function getPageTitle()
+    {
+        return $this->pageTitle;
+    }
+    public function getSkin()
+    {
+        return $this->skin;
+    }
+    public function getAdminName()
+    {
+        return $this->adminName;
+    }
+    public function getUserName()
+    {
+        return $this->userName;
+    }
+    public function getUserImage()
+    {
+        return $this->userImage;
+    }
+    public function getPageName()
+    {
+        return $this->pageName;
+    }
+    public function getContent()
+    {
+        return $this->content;
+    }
+    public function getHeader()
+    {
+        return $this->header;
+    }
+    public function getFooter()
+    {
+        return $this->footer;
+    }
+    public function getNavbar()
+    {
+        return $this->navbar;
+    }
+    public function getNavigationName()
+    {
+        return $this->navigationName;
+    }
+    public function getProfileUrl()
+    {
+        return $this->profileUrl;
+    }
+    public function isAjaxRequest()
+    {
+        return $this->ajaxRequest;
+    }
 }
