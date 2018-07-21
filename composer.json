@@ -12,9 +12,9 @@
 	],
 
 	"require": {
-		"php": ">=5.4.0",
+		"php": ">=7.0",
 		"nette/nette": "~2.4",
-		"chapcz/navigation": "~1.0.0",
+		"chapcz/navigation": "~2.0.0",
 		"janmarek/webloader": "~2.4.0",
 		"nextras/forms": "~2.0.4"
 	},
