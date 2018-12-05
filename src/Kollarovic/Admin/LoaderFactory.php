@@ -2,7 +2,7 @@
 
 namespace Kollarovic\Admin;
 
-use Nette\Object;
+use Nette\SmartObject;
 use Nette\Http\IRequest;
 use WebLoader\Compiler;
 use WebLoader\FileCollection;
@@ -16,9 +16,9 @@ use WebLoader\Nette\JavaScriptLoader;
  * @method LoaderFactory setOutputDir(string $outputDir)
  * @method LoaderFactory setRoot(string $root)
  */
-class LoaderFactory extends Object implements ILoaderFactory
+class LoaderFactory implements ILoaderFactory
 {
-
+    use SmartObject;
 
 	/** @var string **/
 	private $wwwDir;

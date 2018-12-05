@@ -19,13 +19,13 @@ class Extension extends Nette\DI\CompilerExtension
 			'footer' => '',
 			'ajax' => FALSE,
 			'defaultFiles' => [
-				'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css',
-				'https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css',
+				'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css',
+				'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css',
 				"$dir/AdminLTE.min.css",
 				"$dir/_all-skins.min.css",
 				"$dir/admin.css",
-				'https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js',
-				'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js',
+				'https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js',
+				'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js',
 				"$dir/app.min.js",
 				"$dir/netteForms.js",
 			],
@@ -38,6 +38,7 @@ class Extension extends Nette\DI\CompilerExtension
 				'pageMsg' => 'Authentication',
 				'usernameIcon' => 'envelope',
 				'passwordIcon' => 'lock',
+				'usernameType' => 'email',
 			],
 		];
 	}
@@ -65,7 +66,9 @@ class Extension extends Nette\DI\CompilerExtension
 			]);
 
 		$builder->addDefinition($this->prefix('loginFormFactory'))
-			->setClass('Kollarovic\Admin\LoginFormFactory');
+			->setClass('Kollarovic\Admin\LoginFormFactory', [
+				'username' => $config['login']['usernameType']
+			]);
 
 		$builder->addDefinition($this->prefix('loginControlFactory'))
 			->setImplement('Kollarovic\Admin\ILoginControlFactory')
