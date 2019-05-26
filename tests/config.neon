@@ -1,0 +1,37 @@
+extensions:
+	navigation: Kollarovic\Navigation\DI\Extension
+	admin: Kollarovic\Admin\DI\Extension
+
+navigation:
+	admin:
+		label: Homepage
+		link: Homepage:default
+		items:
+			page:
+				label: Page
+				link: Page:default
+				icon: fa-file-text-o
+				value: 50
+			setting:
+				label: Setting
+				link: Setting:default
+				items:
+					base:
+						label: Base
+						link: Setting:base
+					advanced:
+						label: Advanced
+						link: Setting:advanced
+						items:
+							web:
+								label: Web
+								link: Setting:web
+							mail:
+								label: Mail
+								link: Setting:mail
+
+services:
+	translator: Kollarovic\Admin\Test\MockTranslator
+	nette.latteFactory:
+		setup:
+			- addFilter('translate', [@translator, 'translate'])
