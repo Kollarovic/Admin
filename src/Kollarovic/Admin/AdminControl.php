@@ -49,7 +49,7 @@ class AdminControl extends Control
 	/** @var array */
 	public $onSearch;
 
-	/** @var IItemsFactory */
+	/** @var ItemsFactory */
 	private $itemsFactory;
 
 	/** @var ILoaderFactory */
