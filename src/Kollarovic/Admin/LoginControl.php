@@ -5,21 +5,6 @@ namespace Kollarovic\Admin;
 use Nette\Application\UI\Control;
 
 
-/**
- * @method LoginControl setTemplateFile(string $templateFile)
- * @method LoginControl setPageTitle(string $pageTitle)
- * @method LoginControl setPageName(string $pageName)
- * @method LoginControl setPageMsg(string $pageMsg)
- * @method LoginControl setUsernameIcon(string $usernameIcon)
- * @method LoginControl setPasswordIcon(string $passwordIcon)
- *
- * @method string getTemplateFile()
- * @method string getPageTitle()
- * @method string getPageName()
- * @method string getPageMsg()
- * @method string getUsernameIcon()
- * @method string getPasswordIcon()
- */
 class LoginControl extends Control
 {
 
@@ -56,6 +41,84 @@ class LoginControl extends Control
 		$this->loginFormFactory = $loginFormFactory;
 		$this->loaderFactory = $loaderFactory;
 		$this->templateFile = __DIR__ . '/templates/LoginControl.latte';
+	}
+
+
+	public function getPageTitle()
+	{
+		return $this->pageTitle;
+	}
+
+
+	public function setPageTitle($pageTitle)
+	{
+		$this->pageTitle = $pageTitle;
+		return $this;
+	}
+
+
+	public function getPageName()
+	{
+		return $this->pageName;
+	}
+
+
+	public function setPageName($pageName)
+	{
+		$this->pageName = $pageName;
+		return $this;
+	}
+
+
+	public function getPageMsg()
+	{
+		return $this->pageMsg;
+	}
+
+
+	public function setPageMsg($pageMsg)
+	{
+		$this->pageMsg = $pageMsg;
+		return $this;
+	}
+
+
+	public function getUsernameIcon()
+	{
+		return $this->usernameIcon;
+	}
+
+
+	public function setUsernameIcon($usernameIcon)
+	{
+		$this->usernameIcon = $usernameIcon;
+		return $this;
+	}
+
+
+	public function getPasswordIcon()
+	{
+		return $this->passwordIcon;
+	}
+
+
+	public function setPasswordIcon($passwordIcon)
+	{
+		$this->passwordIcon = $passwordIcon;
+		return $this;
+	}
+
+
+	public function getTemplateFile()
+	{
+		return $this->templateFile;
+	}
+
+
+	public function setTemplateFile($templateFile)
+	{
+		$this->templateFile = $templateFile;
+		return $this;
 	}
 
 

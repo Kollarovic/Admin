@@ -19,7 +19,7 @@
 <body class="skin-{$skin}">
 	<div class="wrapper">
 		<header class="main-header">
-			<a href="{plink $rootItem->link}" n:class="logo,$ajax ? ajax">{_$adminName}</a>
+			<a href="{plink $rootItem->getLink()}" n:class="logo,$ajax ? ajax">{_$adminName}</a>
 			<nav class="navbar navbar-static-top" role="navigation" n:block="navbar">
 				<a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
 					<span class="sr-only">{_'Toggle navigation'}</span>

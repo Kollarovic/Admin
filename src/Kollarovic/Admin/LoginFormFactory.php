@@ -2,14 +2,13 @@
 
 namespace Kollarovic\Admin;
 
-use Nette\Object;
 use Nette\Security\User;
 use Nette\Security\AuthenticationException;
 use Kollarovic\Admin\Form\IBaseFormFactory;
 use Nette\Application\UI\Form;
 
 
-class LoginFormFactory extends Object implements ILoginFormFactory
+class LoginFormFactory implements ILoginFormFactory
 {
 
 	/** @var User */
@@ -51,7 +50,7 @@ class LoginFormFactory extends Object implements ILoginFormFactory
 
 		$form->addCheckbox('remember', 'Remember Me');
 		$form->addSubmit('submit', 'Sign In');
-		$form->onSuccess[] = $this->process;
+		$form->onSuccess[] = [$this, 'process'];
 		return $form;
 	}
 

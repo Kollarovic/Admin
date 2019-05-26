@@ -9,37 +9,6 @@ use Nette\Application\UI\Form;
 use Nette\Security\User;
 
 
-/**
- * @method AdminControl setTemplateFile(string $templateFile)
- * @method AdminControl setPageTitle(string $pageTitle)
- * @method AdminControl setSkin(string $skin)
- * @method AdminControl setAdminName(string $adminName)
- * @method AdminControl setUserName(string $userName)
- * @method AdminControl setUserImage(string $userImage)
- * @method AdminControl setPageName(string $pageName)
- * @method AdminControl setContent(string $content)
- * @method AdminControl setHeader(string $header)
- * @method AdminControl setFooter(string $footer)
- * @method AdminControl setNavbar(string $navbar)
- * @method AdminControl setNavigationName(string $navigationName)
- * @method AdminControl setProfileUrl(string $profileUrl)
- * @method AdminControl setAjaxRequest($ajaxRequest)
- *
- * @method string getTemplateFile()
- * @method string getPageTitle()
- * @method string getSkin()
- * @method string getAdminName()
- * @method string getUserName()
- * @method string getUserImage()
- * @method string getPageName()
- * @method string getContent()
- * @method string getHeader()
- * @method string getFooter()
- * @method string getNavbar()
- * @method string getNavigationName()
- * @method string getProfileUrl()
- * @method boolean isAjaxRequest()
- */
 class AdminControl extends Control
 {
 
@@ -107,6 +76,188 @@ class AdminControl extends Control
 		$this->loaderFactory = $loaderFactory;
 		$this->user = $user;
 		$this->templateFile = __DIR__ . '/templates/AdminControl.latte';
+	}
+
+
+	public function getTemplateFile()
+	{
+		return $this->templateFile;
+	}
+
+
+	public function setTemplateFile($templateFile)
+	{
+		$this->templateFile = $templateFile;
+		return $this;
+	}
+
+
+	public function getPageTitle()
+	{
+		return $this->pageTitle;
+	}
+
+
+	public function setPageTitle($pageTitle)
+	{
+		$this->pageTitle = $pageTitle;
+		return $this;
+	}
+
+
+	public function getSkin()
+	{
+		return $this->skin;
+	}
+
+
+	public function setSkin($skin)
+	{
+		$this->skin = $skin;
+		return $this;
+	}
+
+
+	public function getAdminName()
+	{
+		return $this->adminName;
+	}
+
+
+	public function setAdminName($adminName)
+	{
+		$this->adminName = $adminName;
+		return $this;
+	}
+
+
+	public function getUserName()
+	{
+		return $this->userName;
+	}
+
+
+	public function setUserName($userName)
+	{
+		$this->userName = $userName;
+		return $this;
+	}
+
+
+	public function getUserImage()
+	{
+		return $this->userImage;
+	}
+
+
+	public function setUserImage($userImage)
+	{
+		$this->userImage = $userImage;
+		return $this;
+	}
+
+
+	public function getPageName()
+	{
+		return $this->pageName;
+	}
+
+
+	public function setPageName($pageName)
+	{
+		$this->pageName = $pageName;
+		return $this;
+	}
+
+
+	public function getContent()
+	{
+		return $this->content;
+	}
+
+
+	public function setContent($content)
+	{
+		$this->content = $content;
+		return $this;
+	}
+
+
+	public function getHeader()
+	{
+		return $this->header;
+	}
+
+
+	public function setHeader($header)
+	{
+		$this->header = $header;
+		return $this;
+	}
+
+
+	public function getFooter()
+	{
+		return $this->footer;
+	}
+
+
+	public function setFooter($footer)
+	{
+		$this->footer = $footer;
+		return $this;
+	}
+
+
+	public function getNavbar()
+	{
+		return $this->navbar;
+	}
+
+
+	public function setNavbar($navbar)
+	{
+		$this->navbar = $navbar;
+		return $this;
+	}
+
+
+	public function getNavigationName()
+	{
+		return $this->navigationName;
+	}
+
+
+	public function setNavigationName($navigationName)
+	{
+		$this->navigationName = $navigationName;
+		return $this;
+	}
+
+
+	public function getProfileUrl()
+	{
+		return $this->profileUrl;
+	}
+
+
+	public function setProfileUrl($profileUrl)
+	{
+		$this->profileUrl = $profileUrl;
+		return $this;
+	}
+
+
+	public function isAjaxRequest()
+	{
+		return $this->ajaxRequest;
+	}
+
+
+	public function setAjaxRequest($ajaxRequest)
+	{
+		$this->ajaxRequest = $ajaxRequest;
+		return $this;
 	}
 
 

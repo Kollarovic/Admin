@@ -2,13 +2,12 @@
 
 namespace Kollarovic\Admin\Form;
 
-use Nette\Object;
 use Nette\Forms\IFormRenderer;
 use Nette\Localization\ITranslator;
 use Nette\Application\UI\Form;
 
 
-class BaseFormFactory extends Object implements IBaseFormFactory
+class BaseFormFactory implements IBaseFormFactory
 {
 
 	/** @var IFormRenderer */

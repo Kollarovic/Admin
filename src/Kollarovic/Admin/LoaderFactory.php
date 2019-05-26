@@ -2,7 +2,6 @@
 
 namespace Kollarovic\Admin;
 
-use Nette\Object;
 use Nette\Http\IRequest;
 use WebLoader\Compiler;
 use WebLoader\FileCollection;
@@ -10,13 +9,7 @@ use WebLoader\Nette\CssLoader;
 use WebLoader\Nette\JavaScriptLoader;
 
 
-/**
- * @method array getFiles()
- *
- * @method LoaderFactory setOutputDir(string $outputDir)
- * @method LoaderFactory setRoot(string $root)
- */
-class LoaderFactory extends Object implements ILoaderFactory
+class LoaderFactory implements ILoaderFactory
 {
 
 
@@ -38,11 +31,26 @@ class LoaderFactory extends Object implements ILoaderFactory
 	/** @var array */
 	private $files = [];
 
+
 	function __construct($wwwDir, IRequest $httpRequest)
 	{
 		$this->wwwDir = $wwwDir;
 		$this->httpRequest = $httpRequest;
 		$this->root = __DIR__ . '/assets';
+	}
+
+
+	public function setOutputDir($outputDir)
+	{
+		$this->outputDir = $outputDir;
+		return $this;
+	}
+
+
+	public function setRoot($root)
+	{
+		$this->root = $root;
+		return $this;
 	}
 
 
@@ -57,6 +65,12 @@ class LoaderFactory extends Object implements ILoaderFactory
 	{
 		unset($this->cssFiles[$file]);
 		return $this;
+	}
+
+
+	public function getFiles()
+	{
+		return $this->files;
 	}
 
 
