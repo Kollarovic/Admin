@@ -6,6 +6,7 @@ use Kollarovic\Navigation\ItemsFactory;
 use Kollarovic\Navigation\NavigationControl;
 use Nette\Application\UI\Control;
 use Nette\Application\UI\Form;
+use Nette\Localization\ITranslator;
 use Nette\Security\User;
 
 
@@ -23,6 +24,9 @@ class AdminControl extends Control
 
 	/** @var ILoaderFactory */
 	private $loaderFactory;
+
+	/** @var ITranslator */
+	private $translator;
 
 	/** @var User */
 	private $user;
@@ -70,11 +74,12 @@ class AdminControl extends Control
 	private $ajaxRequest = FALSE;
 
 
-	function __construct(ItemsFactory $itemsFactory, ILoaderFactory $loaderFactory, User $user)
+	function __construct(ItemsFactory $itemsFactory, ILoaderFactory $loaderFactory, User $user, ITranslator $translator = null)
 	{
 		$this->itemsFactory = $itemsFactory;
 		$this->loaderFactory = $loaderFactory;
 		$this->user = $user;
+		$this->translator = $translator;
 		$this->templateFile = __DIR__ . '/templates/AdminControl.latte';
 	}
 
@@ -300,7 +305,9 @@ class AdminControl extends Control
 	protected function createTemplate($class = NULL)
 	{
 		$template = parent::createTemplate($class);
-		if (!array_key_exists('translate', $template->getLatte()->getFilters())) {
+		if ($this->translator) {
+			$template->addFilter('translate', [$this->translator, 'translate']);
+		} else {
 			$template->addFilter('translate', function($str){return $str;});
 		}
 		return $template;
@@ -332,7 +339,7 @@ class AdminControl extends Control
 
 	protected function createComponentNavigation()
 	{
-		return new NavigationControl($this->getRootItem());
+		return new NavigationControl($this->getRootItem(), $this->translator);
 	}
 
 

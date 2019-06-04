@@ -29,9 +29,3 @@ navigation:
 							mail:
 								label: Mail
 								link: Setting:mail
-
-services:
-	translator: Kollarovic\Admin\Test\MockTranslator
-	nette.latteFactory:
-		setup:
-			- addFilter('translate', [@translator, 'translate'])

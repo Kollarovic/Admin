@@ -3,6 +3,7 @@
 namespace Kollarovic\Admin;
 
 use Nette\Application\UI\Control;
+use Nette\Localization\ITranslator;
 
 
 class LoginControl extends Control
@@ -20,6 +21,9 @@ class LoginControl extends Control
 	/** @var ILoaderFactory */
 	private $loaderFactory;
 
+	/** @var ITranslator */
+	private $translator;
+
 	/** @var string */
 	private $pageTitle;
 
@@ -36,10 +40,11 @@ class LoginControl extends Control
 	private $passwordIcon;
 
 
-	function __construct(ILoginFormFactory $loginFormFactory, ILoaderFactory $loaderFactory)
+	function __construct(ILoginFormFactory $loginFormFactory, ILoaderFactory $loaderFactory, ITranslator $translator = null)
 	{
 		$this->loginFormFactory = $loginFormFactory;
 		$this->loaderFactory = $loaderFactory;
+		$this->translator = $translator;
 		$this->templateFile = __DIR__ . '/templates/LoginControl.latte';
 	}
 
@@ -140,7 +145,9 @@ class LoginControl extends Control
 	protected function createTemplate($class = NULL)
 	{
 		$template = parent::createTemplate($class);
-		if (!array_key_exists('translate', $template->getLatte()->getFilters())) {
+		if ($this->translator) {
+			$template->addFilter('translate', [$this->translator, 'translate']);
+		} else {
 			$template->addFilter('translate', function($str){return $str;});
 		}
 		return $template;
