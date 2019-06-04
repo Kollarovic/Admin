@@ -13,8 +13,13 @@
 
 	"require": {
 		"php": ">=5.4.0",
-		"nette/nette": "~2.2",
-		"kollarovic/navigation": "~2.0",
+		"nette/bootstrap": "~2.2",
+		"nette/utils": "~2.2",
+		"nette/application": "~2.2",
+		"nette/security": "~2.2",
+		"nette/robot-loader": "~2.2",
+		"latte/latte": "~2.2",
+		"kollarovic/navigation": "~2.0.2",
 		"janmarek/webloader": "~2.4.0",
 		"nextras/forms": "~1.4.1"
 	},
