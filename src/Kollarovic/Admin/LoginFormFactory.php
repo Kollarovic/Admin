@@ -1,51 +1,53 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kollarovic\Admin;
 
-use Nette\Security\User;
-use Nette\Security\AuthenticationException;
 use Kollarovic\Admin\Form\IBaseFormFactory;
+use Nette;
 use Nette\Application\UI\Form;
+use Nette\Security\AuthenticationException;
+use Nette\Security\User;
 
 
 class LoginFormFactory implements ILoginFormFactory
 {
-
 	/** @var User */
 	private $user;
 
-	/** @var string */
-	private $username;
+	/** @var bool */
+	private $useEmail;
 
 	/** @var IBaseFormFactory */
 	private $baseFormFactory;
 
 
-	function __construct(User $user, $username = 'email', IBaseFormFactory $baseFormFactory)
+	public function __construct(User $user, IBaseFormFactory $baseFormFactory, bool $useEmail)
 	{
 		$this->user = $user;
-		$this->username = $username;
 		$this->baseFormFactory = $baseFormFactory;
+		$this->useEmail = $useEmail;
 	}
 
 
-	public function create()
+	public function create(): Form
 	{
 		$form = $this->baseFormFactory->create();
 
-		if ($this->username == 'email') {
+		if ($this->useEmail) {
 			$form->addText('username', 'Email')
-				->setAttribute('placeholder', 'Email')
+				->setHtmlAttribute('placeholder', 'Email')
 				->setRequired('Please enter your email.')
 				->addRule(Form::EMAIL, 'Please enter a valid email address.');
 		} else {
 			$form->addText('username', 'Username')
-				->setAttribute('placeholder', 'Username')
+				->setHtmlAttribute('placeholder', 'Username')
 				->setRequired('Please enter your username.');
 		}
 
 		$form->addPassword('password', 'Password')
-			->setAttribute('placeholder', 'Password')
+			->setHtmlAttribute('placeholder', 'Password')
 			->setRequired('Please enter your password.');
 
 		$form->addCheckbox('remember', 'Remember Me');
@@ -55,20 +57,19 @@ class LoginFormFactory implements ILoginFormFactory
 	}
 
 
-	public function process(Form $form)
+	public function process(Nette\Forms\Form $form): void
 	{
 		$values = $form->values;
 		try {
 			if ($values->remember) {
-				$this->user->setExpiration('14 days', FALSE);
+				$this->user->setExpiration('14 days');
 			} else {
-				$this->user->setExpiration(0, TRUE);
-			}			
+				$this->user->setExpiration(null);
+			}
 			$this->user->login($values->username, $values->password);
 
 		} catch (AuthenticationException $e) {
 			$form->addError($e->getMessage());
 		}
 	}
-
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kollarovic\Admin;
 
 use Nette\Application\UI\Form;
@@ -7,10 +9,5 @@ use Nette\Application\UI\Form;
 
 interface ILoginFormFactory
 {
-
-	/**
-	 * @return Form
-	 */
-	function create();
-
+	public function create(): Form;
 }

@@ -1,16 +1,23 @@
 <?php
+declare(strict_types=1);
 
 namespace Kollarovic\Admin\Test;
 
 use Kollarovic\Admin\IAdminControlFactory;
 use Kollarovic\Admin\ILoginControlFactory;
-use Nette\Application\UI\Presenter;
 use Nette\Application\UI\InvalidLinkException;
+use Nette\Application\UI\Presenter;
 use Nette\Security\Identity;
 
 
 class MockPresenter extends Presenter
 {
+
+	/** @var IAdminControlFactory @inject */
+	public $adminControlFactory;
+
+	/** @var  ILoginControlFactory @inject */
+	public $loginControlFactory;
 
 	private $currentDestination = 'Setting:web';
 
@@ -28,14 +35,8 @@ class MockPresenter extends Presenter
 		'Setting:mail' => '/setting/mail',
 	];
 
-    /** @var IAdminControlFactory @inject */
-    public $adminControlFactory;
 
-    /** @var  ILoginControlFactory @inject */
-    public $loginControlFactory;
-
-
-	public function link($destination, $args = array())
+	public function link(string $destination, $args = []): string
 	{
 		if (!array_key_exists($destination, $this->linkToUrl)) {
 			throw new InvalidLinkException("'$destination'");
@@ -45,31 +46,37 @@ class MockPresenter extends Presenter
 	}
 
 
-	public function isLinkCurrent($destination = NULL, $args = array())
+	public function isLinkCurrent(string $destination = null, $args = []): bool
 	{
-		return ($destination == $this->currentDestination);
+		return $destination == $this->currentDestination;
 	}
 
 
-    protected function createComponentAdminControl()
-    {
-        $this->user->login(new Identity(1));
-        $this->saveGlobalState();
-        $adminControl = $this->adminControlFactory->create();
-        $adminControl->setUserName('Mario Kollarovic')->setUserImage('images/user.png');
-        $adminControl->setProfileUrl('/');
-        $adminControl->setSkin('red');
-        $adminControl->onLoggedOut[] = function() {
-            $this->redirect('Sign:in');
-        };
-        return $adminControl;
-    }
+	public function actionDefault()
+	{
+		$this->terminate();
+	}
 
 
-    protected function createComponentLoginControl()
-    {
-        $loginControl = $this->loginControlFactory->create();
-        return $loginControl;
-    }
+	protected function createComponentAdminControl()
+	{
+		$this->user->login(new Identity(1));
 
+		$this->saveGlobalState();
+		$adminControl = $this->adminControlFactory->create();
+		$adminControl->setUserName('Mario Kollarovic')->setUserImage('images/user.png');
+		$adminControl->setProfileUrl('/');
+		$adminControl->setSkin('red');
+		$adminControl->onLoggedOut[] = function () {
+			$this->redirect('Sign:in');
+		};
+		return $adminControl;
+	}
+
+
+	protected function createComponentLoginControl()
+	{
+		$loginControl = $this->loginControlFactory->create();
+		return $loginControl;
+	}
 }

@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 
 if (!$autoload = @include __DIR__ . '/../vendor/autoload.php') {
@@ -13,6 +14,8 @@ Tester\Environment::setup();
 
 define('TEMP_DIR', __DIR__ . '/temp');
 
-function run(Tester\TestCase $testCase) {
+
+function run(Tester\TestCase $testCase)
+{
 	$testCase->run();
 }

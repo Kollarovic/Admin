@@ -1,23 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kollarovic\Admin;
 
-use WebLoader\Nette\CssLoader;
-use WebLoader\Nette\JavaScriptLoader;
+use Nette\Application\UI\Control;
 
 
 interface ILoaderFactory
 {
+	function createCssLoader(): Control;
 
-	/**
-	 * @return CssLoader
-	 */
-	function createCssLoader();
-
-
-	/**
-	 * @return JavaScriptLoader
-	 */
-	function createJavaScriptLoader();
-
+	function createJavaScriptLoader(): Control;
 }

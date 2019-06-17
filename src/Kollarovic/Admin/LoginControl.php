@@ -1,14 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kollarovic\Admin;
 
 use Nette\Application\UI\Control;
+use Nette\Application\UI\Form;
+use Nette\Bridges\ApplicationLatte\Template;
 use Nette\Localization\ITranslator;
+use Nette\UnexpectedValueException;
 
 
 class LoginControl extends Control
 {
-
 	/** @var array */
 	public $onLoggedIn;
 
@@ -21,7 +25,7 @@ class LoginControl extends Control
 	/** @var ILoaderFactory */
 	private $loaderFactory;
 
-	/** @var ITranslator */
+	/** @var ITranslator|null */
 	private $translator;
 
 	/** @var string */
@@ -40,8 +44,11 @@ class LoginControl extends Control
 	private $passwordIcon;
 
 
-	function __construct(ILoginFormFactory $loginFormFactory, ILoaderFactory $loaderFactory, ITranslator $translator = null)
-	{
+	public function __construct(
+		ILoginFormFactory $loginFormFactory,
+		ILoaderFactory $loaderFactory,
+		ITranslator $translator = null
+	) {
 		$this->loginFormFactory = $loginFormFactory;
 		$this->loaderFactory = $loaderFactory;
 		$this->translator = $translator;
@@ -49,130 +56,145 @@ class LoginControl extends Control
 	}
 
 
-	public function getPageTitle()
-	{
-		return $this->pageTitle;
-	}
+	/********************************************************************************
+	 *                                    Render                                    *
+	 ********************************************************************************/
 
 
-	public function setPageTitle($pageTitle)
-	{
-		$this->pageTitle = $pageTitle;
-		return $this;
-	}
-
-
-	public function getPageName()
-	{
-		return $this->pageName;
-	}
-
-
-	public function setPageName($pageName)
-	{
-		$this->pageName = $pageName;
-		return $this;
-	}
-
-
-	public function getPageMsg()
-	{
-		return $this->pageMsg;
-	}
-
-
-	public function setPageMsg($pageMsg)
-	{
-		$this->pageMsg = $pageMsg;
-		return $this;
-	}
-
-
-	public function getUsernameIcon()
-	{
-		return $this->usernameIcon;
-	}
-
-
-	public function setUsernameIcon($usernameIcon)
-	{
-		$this->usernameIcon = $usernameIcon;
-		return $this;
-	}
-
-
-	public function getPasswordIcon()
-	{
-		return $this->passwordIcon;
-	}
-
-
-	public function setPasswordIcon($passwordIcon)
-	{
-		$this->passwordIcon = $passwordIcon;
-		return $this;
-	}
-
-
-	public function getTemplateFile()
+	public function getTemplateFile(): string
 	{
 		return $this->templateFile;
 	}
 
 
-	public function setTemplateFile($templateFile)
+	public function setTemplateFile(string $templateFile): self
 	{
 		$this->templateFile = $templateFile;
 		return $this;
 	}
 
 
-	public function render(array $options = [])
+	public function render(array $options = []): void
 	{
-		$this->template->setFile($this->getTemplateFile());
-		$this->template->pageTitle = $this->pageTitle;
-		$this->template->pageName = $this->pageName;
-		$this->template->pageMsg = $this->pageMsg;
-		$this->template->usernameIcon = $this->usernameIcon;
-		$this->template->passwordIcon = $this->passwordIcon;
-		foreach ($options as $key => $value) {
-			$this->template->$key = $value;
+		$template = $this->getTemplate();
+
+		if (!$template instanceof Template) {
+			throw new UnexpectedValueException();
 		}
-		$this->template->render();
-	}
 
-
-	protected function createTemplate($class = NULL)
-	{
-		$template = parent::createTemplate($class);
 		if ($this->translator) {
-			$template->addFilter('translate', [$this->translator, 'translate']);
+			$template->setTranslator($this->translator);
 		} else {
-			$template->addFilter('translate', function($str){return $str;});
+			$template->addFilter('translate', function ($str) {return $str;});
 		}
-		return $template;
+
+		$template->setFile($this->getTemplateFile());
+		$template->pageTitle = $this->pageTitle;
+		$template->pageName = $this->pageName;
+		$template->pageMsg = $this->pageMsg;
+		$template->usernameIcon = $this->usernameIcon;
+		$template->passwordIcon = $this->passwordIcon;
+
+		foreach ($options as $key => $value) {
+			$template->$key = $value;
+		}
+		$template->render();
 	}
 
 
-	protected function createComponentForm()
+	/********************************************************************************
+	 *                                  Components                                  *
+	 ********************************************************************************/
+
+
+	protected function createComponentForm(): Form
 	{
 		$form = $this->loginFormFactory->create();
-		$form->onSuccess[] = function($form) {
+		$form->onSuccess[] = function (\Nette\Forms\Form $form): void {
 			$this->onLoggedIn($form);
 		};
 		return $form;
 	}
 
 
-	protected function createComponentCss()
+	protected function createComponentCss(): Control
 	{
 		return $this->loaderFactory->createCssLoader();
 	}
 
 
-	protected function createComponentJs()
+	protected function createComponentJs(): Control
 	{
 		return $this->loaderFactory->createJavaScriptLoader();
 	}
 
+
+	/********************************************************************************
+	 *                              Getters and Setters                             *
+	 ********************************************************************************/
+
+
+	public function getPageTitle(): string
+	{
+		return $this->pageTitle;
+	}
+
+
+	public function setPageTitle(string $pageTitle): self
+	{
+		$this->pageTitle = $pageTitle;
+		return $this;
+	}
+
+
+	public function getPageName(): string
+	{
+		return $this->pageName;
+	}
+
+
+	public function setPageName(string $pageName): self
+	{
+		$this->pageName = $pageName;
+		return $this;
+	}
+
+
+	public function getPageMsg(): string
+	{
+		return $this->pageMsg;
+	}
+
+
+	public function setPageMsg(string $pageMsg): self
+	{
+		$this->pageMsg = $pageMsg;
+		return $this;
+	}
+
+
+	public function getUsernameIcon(): string
+	{
+		return $this->usernameIcon;
+	}
+
+
+	public function setUsernameIcon(string $usernameIcon): self
+	{
+		$this->usernameIcon = $usernameIcon;
+		return $this;
+	}
+
+
+	public function getPasswordIcon(): string
+	{
+		return $this->passwordIcon;
+	}
+
+
+	public function setPasswordIcon(string $passwordIcon): self
+	{
+		$this->passwordIcon = $passwordIcon;
+		return $this;
+	}
 }

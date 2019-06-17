@@ -1,33 +1,57 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-{if $pageTitle}
-	<title>{$pageTitle}</title>
-{else}
-	<title>{control navigation:title} - {_$adminName}</title>
-{/if}
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+	{if $pageTitle}
+		<title>{$pageTitle}</title>
+	{else}
+		<title>{control navigation:title} - {_$adminName}</title>
+	{/if}
+
 	{control css}
+
 	<link rel="shortcut icon" href="{$basePath}/favicon.ico">
 	<!--[if lt IE 9]>
 		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	<![endif]-->
+	<style>
+		ul.treeview-menu li i.fa:before {
+			content: "\f10c";
+		}
+	</style>
+
 	{_$header|noescape}
 </head>
-<body class="skin-{$skin}">
+<body class="hold-transition skin-{$skin} sidebar-mini {if $sidebarCollapse}sidebar-collapse{/if}">
+
 	<div class="wrapper">
+
 		<header class="main-header">
-			<a href="{plink $rootItem->getLink()}" n:class="logo,$ajax ? ajax">{_$adminName}</a>
-			<nav class="navbar navbar-static-top" role="navigation" n:block="navbar">
-				<a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+
+			<a href="{plink $rootItem->getLink()}" n:class="logo,$ajax ? ajax">
+				<span class="logo-mini">{_$adminShortName}</span>
+				<span class="logo-lg">{_$adminName}</span>
+			</a>
+
+			<nav class="navbar navbar-static-top" n:block="navbar">
+
+				<a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
 					<span class="sr-only">{_'Toggle navigation'}</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
 				</a>
+
 				<div class="navbar-custom-menu">
-					<ul class="nav navbar-nav" n:if="$user->identity">
+					<ul class="nav navbar-nav">
 						{$navbar|noescape}
-						<li class="dropdown user user-menu">
+
+						<li class="dropdown user user-menu" n:if="$user->identity">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 								<i class="fa fa-user"></i>
 								<span class="hidden-xs">{$userName}</span>
@@ -50,24 +74,30 @@
 								</li>
 							</ul>
 						</li>
+
 					</ul>
 				</div>
 			</nav>
 		</header>
+
 		<aside class="main-sidebar">
 			<section class="sidebar">
-				{form searchForm class=>'sidebar-form'}
-					<div class="input-group">
-						<input type="text" n:name="key" class="form-control" placeholder="{_'Search'}"/>
-						<span class="input-group-btn">
-							<button type='submit' name='search' id='search-btn' class="btn btn-flat">
-								<i class="fa fa-search"></i>
-							</button>
-						</span>
-					</div>
-				{/form}
+				{if $showSearchForm}
+					{form searchForm class=>'sidebar-form'}
+						<div class="input-group">
+							<input type="text" n:name="key" class="form-control" placeholder="{_'Search'}"/>
+							<span class="input-group-btn">
+								<button type='submit' name='search' id='search-btn' class="btn btn-flat">
+									<i class="fa fa-search"></i>
+								</button>
+							</span>
+						</div>
+					{/form}
+				{else}
+					<br>
+				{/if}
 				{snippet menu}
-					{block menu}{control navigation:menu class => 'sidebar-menu', subclass => 'treeview-menu', openClass => 'active', open => TRUE, ajax => $ajax}{/block}
+					{block menu}{control navigation:menu class => 'sidebar-menu', subclass => 'treeview-menu', openClass => 'active', dropdownClass => 'treeview', open => true, ajax => $ajax}{/block}
 				{/snippet}
 			</section>
 		</aside>
@@ -91,6 +121,7 @@
 		{_$footer|noescape}
 		</footer>
 	</div>
+
 	{block scripts}
 	{control js}
 	{/block}

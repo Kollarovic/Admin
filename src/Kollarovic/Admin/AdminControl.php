@@ -1,18 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kollarovic\Admin;
 
+use Kollarovic\Navigation\Item;
 use Kollarovic\Navigation\ItemsFactory;
 use Kollarovic\Navigation\NavigationControl;
 use Nette\Application\UI\Control;
 use Nette\Application\UI\Form;
+use Nette\Bridges\ApplicationLatte\Template;
 use Nette\Localization\ITranslator;
 use Nette\Security\User;
+use Nette\UnexpectedValueException;
 
 
 class AdminControl extends Control
 {
-
 	/** @var array */
 	public $onLoggedOut;
 
@@ -25,7 +29,7 @@ class AdminControl extends Control
 	/** @var ILoaderFactory */
 	private $loaderFactory;
 
-	/** @var ITranslator */
+	/** @var ITranslator|null */
 	private $translator;
 
 	/** @var User */
@@ -42,6 +46,9 @@ class AdminControl extends Control
 
 	/** @var string */
 	private $adminName;
+
+	/** @var string */
+	private $adminShortName;
 
 	/** @var string */
 	private $userName;
@@ -67,14 +74,17 @@ class AdminControl extends Control
 	/** @var string */
 	private $navigationName;
 
+	/** @var bool */
+	private $sidebarCollapse = false;
+
 	/** @var string */
 	private $profileUrl;
 
-	/** @var boolean */
-	private $ajaxRequest = FALSE;
+	/** @var bool */
+	private $ajaxRequest = false;
 
 
-	function __construct(ItemsFactory $itemsFactory, ILoaderFactory $loaderFactory, User $user, ITranslator $translator = null)
+	public function __construct(ItemsFactory $itemsFactory, ILoaderFactory $loaderFactory, User $user, ITranslator $translator = null)
 	{
 		$this->itemsFactory = $itemsFactory;
 		$this->loaderFactory = $loaderFactory;
@@ -84,91 +94,212 @@ class AdminControl extends Control
 	}
 
 
-	public function getTemplateFile()
+	/********************************************************************************
+	 *                                    Render                                    *
+	 ********************************************************************************/
+
+
+	public function getTemplateFile(): string
 	{
 		return $this->templateFile;
 	}
 
 
-	public function setTemplateFile($templateFile)
+	public function setTemplateFile(string $templateFile): self
 	{
 		$this->templateFile = $templateFile;
 		return $this;
 	}
 
 
-	public function getPageTitle()
+	public function render(array $options = []): void
+	{
+		$template = $this->getTemplate();
+
+		if (!$template instanceof Template) {
+			throw new UnexpectedValueException();
+		}
+
+		if ($this->translator) {
+			$template->setTranslator($this->translator);
+		} else {
+			$template->addFilter('translate', function ($str) {return $str;});
+		}
+
+		$template->setFile($this->getTemplateFile());
+		$template->pageTitle = $this->pageTitle;
+		$template->skin = $this->skin;
+		$template->profileUrl = $this->profileUrl;
+		$template->userName = $this->userName;
+		$template->userImage = $this->userImage;
+		$template->adminName = $this->adminName;
+		$template->adminShortName = $this->adminShortName;
+		$template->pageName = $this->pageName;
+		$template->content = $this->content;
+		$template->header = $this->header;
+		$template->footer = $this->footer;
+		$template->navbar = $this->navbar;
+		$template->ajax = $this->ajaxRequest;
+		$template->rootItem = $this->getRootItem();
+		$template->showSearchForm = (bool) $this->onSearch;
+		$template->sidebarCollapse = $this->sidebarCollapse;
+
+		foreach ($options as $key => $value) {
+			$template->$key = $value;
+		}
+		$template->render();
+	}
+
+
+	public function renderPanel(array $options = []): void
+	{
+		$this['navigation']->renderPanel($options);
+	}
+
+
+	/********************************************************************************
+	 *                                   Signals                                    *
+	 ********************************************************************************/
+
+
+	public function handleSignOut(): void
+	{
+		$this->user->logout();
+		$this->onLoggedOut();
+	}
+
+
+	/********************************************************************************
+	 *                                  Components                                  *
+	 ********************************************************************************/
+
+
+	protected function createComponentSearchForm(): Form
+	{
+		$form = new Form();
+		$form->addText('key');
+		$form->onSuccess[] = function (\Nette\Forms\Form $form): void {
+			$this->onSearch($form->values->key);
+		};
+		return $form;
+	}
+
+
+	protected function createComponentCss(): Control
+	{
+		return $this->loaderFactory->createCssLoader();
+	}
+
+
+	protected function createComponentJs(): Control
+	{
+		return $this->loaderFactory->createJavaScriptLoader();
+	}
+
+
+	protected function createComponentNavigation(): NavigationControl
+	{
+		$navigation = new NavigationControl($this->getRootItem(), $this->translator);
+		return $navigation;
+	}
+
+
+	/********************************************************************************
+	 *                              Getters and Setters                             *
+	 ********************************************************************************/
+
+
+	public function getRootItem(): Item
+	{
+		return $this->itemsFactory->create($this->navigationName);
+	}
+
+
+	public function getPageTitle(): string
 	{
 		return $this->pageTitle;
 	}
 
 
-	public function setPageTitle($pageTitle)
+	public function setPageTitle(string $pageTitle): self
 	{
 		$this->pageTitle = $pageTitle;
 		return $this;
 	}
 
 
-	public function getSkin()
+	public function getSkin(): string
 	{
 		return $this->skin;
 	}
 
 
-	public function setSkin($skin)
+	public function setSkin(string $skin): self
 	{
 		$this->skin = $skin;
 		return $this;
 	}
 
 
-	public function getAdminName()
+	public function getAdminName(): string
 	{
 		return $this->adminName;
 	}
 
 
-	public function setAdminName($adminName)
+	public function setAdminName(string $adminName): self
 	{
 		$this->adminName = $adminName;
 		return $this;
 	}
 
 
-	public function getUserName()
+	public function getAdminShortName(): string
+	{
+		return $this->adminShortName;
+	}
+
+
+	public function setAdminShortName(string $adminShortName): self
+	{
+		$this->adminShortName = $adminShortName;
+		return $this;
+	}
+
+
+	public function getUserName(): string
 	{
 		return $this->userName;
 	}
 
 
-	public function setUserName($userName)
+	public function setUserName(string $userName): self
 	{
 		$this->userName = $userName;
 		return $this;
 	}
 
 
-	public function getUserImage()
+	public function getUserImage(): string
 	{
 		return $this->userImage;
 	}
 
 
-	public function setUserImage($userImage)
+	public function setUserImage(string $userImage): self
 	{
 		$this->userImage = $userImage;
 		return $this;
 	}
 
 
-	public function getPageName()
+	public function getPageName(): string
 	{
 		return $this->pageName;
 	}
 
 
-	public function setPageName($pageName)
+	public function setPageName(string $pageName): self
 	{
 		$this->pageName = $pageName;
 		return $this;
@@ -181,171 +312,100 @@ class AdminControl extends Control
 	}
 
 
-	public function setContent($content)
+	public function setContent(string $content): self
 	{
 		$this->content = $content;
 		return $this;
 	}
 
 
-	public function getHeader()
+	public function getHeader(): string
 	{
 		return $this->header;
 	}
 
 
-	public function setHeader($header)
+	public function setHeader(string $header): self
 	{
 		$this->header = $header;
 		return $this;
 	}
 
 
-	public function getFooter()
+	public function getFooter(): string
 	{
 		return $this->footer;
 	}
 
 
-	public function setFooter($footer)
+	public function setFooter(string $footer): self
 	{
 		$this->footer = $footer;
 		return $this;
 	}
 
 
-	public function getNavbar()
+	public function getNavbar(): string
 	{
 		return $this->navbar;
 	}
 
 
-	public function setNavbar($navbar)
+	public function setNavbar(string $navbar): self
 	{
 		$this->navbar = $navbar;
 		return $this;
 	}
 
 
-	public function getNavigationName()
+	public function getNavigationName(): string
 	{
 		return $this->navigationName;
 	}
 
 
-	public function setNavigationName($navigationName)
+	public function setNavigationName(string $navigationName): self
 	{
 		$this->navigationName = $navigationName;
 		return $this;
 	}
 
 
-	public function getProfileUrl()
+	public function getSidebarCollapse(): bool
+	{
+		return $this->sidebarCollapse;
+	}
+
+
+	public function setSidebarCollapse(bool $sidebarCollapse): self
+	{
+		$this->sidebarCollapse = $sidebarCollapse;
+		return $this;
+	}
+
+
+	public function getProfileUrl(): string
 	{
 		return $this->profileUrl;
 	}
 
 
-	public function setProfileUrl($profileUrl)
+	public function setProfileUrl(string $profileUrl): self
 	{
 		$this->profileUrl = $profileUrl;
 		return $this;
 	}
 
 
-	public function isAjaxRequest()
+	public function isAjaxRequest(): bool
 	{
 		return $this->ajaxRequest;
 	}
 
 
-	public function setAjaxRequest($ajaxRequest)
+	public function setAjaxRequest(bool $ajaxRequest): self
 	{
 		$this->ajaxRequest = $ajaxRequest;
 		return $this;
 	}
-
-
-	public function render(array $options = [])
-	{
-		$this->template->setFile($this->getTemplateFile());
-		$this->template->pageTitle = $this->pageTitle;
-		$this->template->skin = $this->skin;
-		$this->template->profileUrl = $this->profileUrl;
-		$this->template->userName = $this->userName;
-		$this->template->userImage = $this->userImage;
-		$this->template->adminName = $this->adminName;
-		$this->template->pageName = $this->pageName;
-		$this->template->content = $this->content;
-		$this->template->header = $this->header;
-		$this->template->footer = $this->footer;
-		$this->template->navbar = $this->navbar;
-		$this->template->ajax = $this->ajaxRequest;
-		$this->template->rootItem = $this->getRootItem();
-		foreach ($options as $key => $value) {
-			$this->template->$key = $value;
-		}
-		$this->template->render();
-	}
-
-
-	public function renderPanel(array $options = [])
-	{
-		$this['navigation']->renderPanel($options);
-	}
-
-
-	public function handleSignOut()
-	{
-		$this->user->logout();
-		$this->onLoggedOut();
-	}
-
-
-	protected function createTemplate($class = NULL)
-	{
-		$template = parent::createTemplate($class);
-		if ($this->translator) {
-			$template->addFilter('translate', [$this->translator, 'translate']);
-		} else {
-			$template->addFilter('translate', function($str){return $str;});
-		}
-		return $template;
-	}
-
-
-	protected function createComponentSearchForm()
-	{
-		$form = new Form();
-		$form->addText('key');
-		$form->onSuccess[] = function($form) {
-			$this->onSearch($form->values->key);
-		};
-		return $form;
-	}
-
-
-	protected function createComponentCss()
-	{
-		return $this->loaderFactory->createCssLoader();
-	}
-
-
-	protected function createComponentJs()
-	{
-		return $this->loaderFactory->createJavaScriptLoader();
-	}
-
-
-	protected function createComponentNavigation()
-	{
-		return new NavigationControl($this->getRootItem(), $this->translator);
-	}
-
-
-	private function getRootItem()
-	{
-		return $this->itemsFactory->create($this->navigationName);
-	}
-
 }
