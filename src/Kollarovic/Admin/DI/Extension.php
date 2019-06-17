@@ -17,7 +17,6 @@ class Extension extends Nette\DI\CompilerExtension
 {
 	private function getDefaultConfig($builder)
 	{
-		$dir = dirname(__DIR__) . '/assets';
 		return [
 			'wwwDir' => $builder->parameters['wwwDir'],
 			'name' => 'Admin',
