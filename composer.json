@@ -20,14 +20,13 @@
 		"nette/utils": "^3.0",
 		"nette/forms": "^3.0",
 		"latte/latte": "^2.5",
-		"kollarovic/navigation": "dev-master",
-		"nextras/forms-rendering": "^1.0@dev"
+		"kollarovic/navigation": "^3.0",
+		"nextras/forms-rendering": "^1.1"
 	},
 
 	"require-dev": {
 		"nette/tester": "~1.3",
-		"phpstan/phpstan": "^0.11.8",
-		"phpstan/phpstan-nette": "^0.11.1"
+		"phpstan/phpstan-nette": "^1.0"
 	},
 
 	"autoload": {
