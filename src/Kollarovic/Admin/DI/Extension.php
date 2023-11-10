@@ -22,6 +22,7 @@ class Extension extends Nette\DI\CompilerExtension
 			'name' => 'Admin',
 			'shortName' => 'A',
 			'skin' => 'red',
+            'header' => '',
 			'footer' => '',
 			'ajax' => false,
 			'defaultFiles' => [
@@ -92,6 +93,7 @@ class Extension extends Nette\DI\CompilerExtension
 			->addSetup('setAdminName', [$config['name']])
 			->addSetup('setAdminShortName', [$config['shortName']])
 			->addSetup('setNavigationName', [$config['navigation']])
+            ->addSetup('setHeader', [$config['header']])
 			->addSetup('setFooter', [$config['footer']])
 			->addSetup('setAjaxRequest', [$config['ajax']]);
 	}
