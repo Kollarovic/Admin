@@ -120,12 +120,7 @@ class AdminControl extends Control
 			throw new UnexpectedValueException();
 		}
 
-		if ($this->translator) {
-			$template->setTranslator($this->translator);
-		} else {
-			$template->addFilter('translate', function ($str) {return $str;});
-		}
-
+        $template->setTranslator($this->translator ? $this->translator : new FallbackTranslator());
 		$template->setFile($this->getTemplateFile());
 		$template->pageTitle = $this->pageTitle;
 		$template->skin = $this->skin;
