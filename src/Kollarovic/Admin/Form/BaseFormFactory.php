@@ -5,20 +5,20 @@ declare(strict_types=1);
 namespace Kollarovic\Admin\Form;
 
 use Nette\Application\UI\Form;
-use Nette\Forms\IFormRenderer;
-use Nette\Localization\ITranslator;
+use Nette\Forms\FormRenderer;
+use Nette\Localization\Translator;
 
 
 class BaseFormFactory implements IBaseFormFactory
 {
-	/** @var IFormRenderer */
-	private $formRender;
+	/** @var FormRenderer */
+	private FormRenderer $formRender;
 
-	/** @var ITranslator|null */
-	private $translator;
+	/** @var ?Translator */
+	private ?Translator $translator;
 
 
-	public function __construct(IFormRenderer $formRender, ITranslator $translator = null)
+	public function __construct(FormRenderer $formRender, ?Translator $translator = null)
 	{
 		$this->translator = $translator;
 		$this->formRender = $formRender;
