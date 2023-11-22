@@ -7,47 +7,47 @@ namespace Kollarovic\Admin;
 use Nette\Application\UI\Control;
 use Nette\Application\UI\Form;
 use Nette\Bridges\ApplicationLatte\Template;
-use Nette\Localization\ITranslator;
+use Nette\Localization\Translator;
 use Nette\UnexpectedValueException;
 
 
 class LoginControl extends Control
 {
-	/** @var array */
-	public $onLoggedIn;
-
-	/** @var string */
-	private $templateFile;
+    /** @var array<callable(self): void> */
+	public array $onLoggedIn = [];
 
 	/** @var ILoginFormFactory */
-	private $loginFormFactory;
+	private ILoginFormFactory $loginFormFactory;
 
 	/** @var ILoaderFactory */
-	private $loaderFactory;
+	private ILoaderFactory $loaderFactory;
 
-	/** @var ITranslator|null */
-	private $translator;
+	/** @var ?Translator */
+	private ?Translator $translator;
 
-	/** @var string */
-	private $pageTitle;
+    /** @var string */
+    private string $templateFile;
 
-	/** @var string */
-	private $pageName;
+    /** @var string */
+	private string $pageTitle = 'Login - Admin';
 
-	/** @var string */
-	private $pageMsg;
+	/** @var ?string */
+	private ?string $pageName = 'Admin';
 
-	/** @var string */
-	private $usernameIcon;
+	/** @var ?string */
+	private ?string $pageMsg = null;
 
-	/** @var string */
-	private $passwordIcon;
+	/** @var ?string */
+	private ?string $usernameIcon = null;
+
+	/** @var ?string */
+	private ?string $passwordIcon = null;
 
 
 	public function __construct(
 		ILoginFormFactory $loginFormFactory,
 		ILoaderFactory $loaderFactory,
-		ITranslator $translator = null
+		Translator $translator = null
 	) {
 		$this->loginFormFactory = $loginFormFactory;
 		$this->loaderFactory = $loaderFactory;
@@ -74,6 +74,9 @@ class LoginControl extends Control
 	}
 
 
+    /**
+     * @param array<string, mixed> $options
+     */
 	public function render(array $options = []): void
 	{
 		$template = $this->getTemplate();
@@ -142,7 +145,7 @@ class LoginControl extends Control
 	}
 
 
-	public function getPageName(): string
+	public function getPageName(): ?string
 	{
 		return $this->pageName;
 	}
@@ -155,7 +158,7 @@ class LoginControl extends Control
 	}
 
 
-	public function getPageMsg(): string
+	public function getPageMsg(): ?string
 	{
 		return $this->pageMsg;
 	}
@@ -168,7 +171,7 @@ class LoginControl extends Control
 	}
 
 
-	public function getUsernameIcon(): string
+	public function getUsernameIcon(): ?string
 	{
 		return $this->usernameIcon;
 	}
@@ -181,7 +184,7 @@ class LoginControl extends Control
 	}
 
 
-	public function getPasswordIcon(): string
+	public function getPasswordIcon(): ?string
 	{
 		return $this->passwordIcon;
 	}

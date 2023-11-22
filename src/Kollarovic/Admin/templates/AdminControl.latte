@@ -25,7 +25,10 @@
 		}
 	</style>
 
-	{_$header|noescape}
+	{if $header}
+		{_$header|noescape}
+	{/if}
+
 </head>
 <body class="hold-transition skin-{$skin} sidebar-mini {if $sidebarCollapse}sidebar-collapse{/if}">
 
@@ -118,7 +121,9 @@
 			</section>
 		</div>
 		<footer class="main-footer" n:block="footer">
-		{_$footer|noescape}
+			{if $footer}
+				{_$footer|noescape}
+			{/if}
 		</footer>
 	</div>
 

@@ -10,10 +10,13 @@ use Nette\Utils\Html;
 
 class JsControl extends Control
 {
-	/** @var array */
-	private $files;
+    /** @var array<string, string> */
+    private array $files;
 
 
+    /**
+     * @param array<string, string> $files
+     */
 	public function __construct(array $files)
 	{
 		$this->files = $files;

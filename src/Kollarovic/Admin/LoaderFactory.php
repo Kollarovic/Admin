@@ -9,11 +9,11 @@ use Nette\Application\UI\Control;
 
 class LoaderFactory implements ILoaderFactory
 {
-	/** @var array */
-	private $files = [];
+	/** @var array<string, string> */
+	private array $files = [];
 
 
-	public function addFile(string $file)
+	public function addFile(string $file): self
 	{
 		$this->files[$file] = $file;
 		return $this;
@@ -27,6 +27,9 @@ class LoaderFactory implements ILoaderFactory
 	}
 
 
+    /**
+     * @return array<string, string>
+     */
 	public function getFiles(): array
 	{
 		return $this->files;

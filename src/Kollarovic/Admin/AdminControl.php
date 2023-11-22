@@ -10,81 +10,81 @@ use Kollarovic\Navigation\NavigationControl;
 use Nette\Application\UI\Control;
 use Nette\Application\UI\Form;
 use Nette\Bridges\ApplicationLatte\Template;
-use Nette\Localization\ITranslator;
+use Nette\Localization\Translator;
 use Nette\Security\User;
 use Nette\UnexpectedValueException;
 
 
 class AdminControl extends Control
 {
-	/** @var array */
-	public $onLoggedOut;
+    /** @var array<callable(self): void> */
+    public array $onLoggedOut = [];
 
-	/** @var array */
-	public $onSearch;
+    /** @var array<callable(self): void> */
+	public array $onSearch = [];
 
 	/** @var ItemsFactory */
-	private $itemsFactory;
+	private ItemsFactory $itemsFactory;
 
 	/** @var ILoaderFactory */
-	private $loaderFactory;
+	private ILoaderFactory $loaderFactory;
 
-	/** @var ITranslator|null */
-	private $translator;
+	/** @var ?Translator */
+	private ?Translator $translator;
 
 	/** @var User */
-	private $user;
+	private User $user;
 
 	/** @var string */
-	private $templateFile;
+    private string $templateFile;
 
 	/** @var string */
-	private $pageTitle;
+	private string $pageTitle = 'Admin';
 
 	/** @var string */
-	private $skin;
+	private string $skin = 'red';
 
 	/** @var string */
-	private $adminName;
+	private string $adminName = 'Admin';
 
 	/** @var string */
-	private $adminShortName;
+	private string $adminShortName = 'A';
 
 	/** @var string */
-	private $userName;
+	private string $userName = 'Admin';
+
+	/** @var ?string */
+	private ?string $userImage = null;
 
 	/** @var string */
-	private $userImage;
+	private string $pageName = 'Admin';
+
+	/** @var ?string */
+	private ?string $content = null;
+
+	/** @var ?string */
+	private ?string $header = null;
+
+	/** @var ?string */
+	private ?string $footer = null;
+
+	/** @var ?string */
+	private ?string $navbar = null;
 
 	/** @var string */
-	private $pageName;
-
-	/** @var string */
-	private $content;
-
-	/** @var string */
-	private $header;
-
-	/** @var string */
-	private $footer;
-
-	/** @var string */
-	private $navbar;
-
-	/** @var string */
-	private $navigationName;
+	private string $navigationName = 'admin';
 
 	/** @var bool */
-	private $sidebarCollapse = false;
+	private bool $sidebarCollapse = false;
 
-	/** @var string */
-	private $profileUrl;
+	/** @var ?string */
+	private ?string $profileUrl = null;
 
 	/** @var bool */
-	private $ajaxRequest = false;
+	private bool $ajaxRequest = false;
 
 
-	public function __construct(ItemsFactory $itemsFactory, ILoaderFactory $loaderFactory, User $user, ITranslator $translator = null)
+	public function __construct(ItemsFactory $itemsFactory, ILoaderFactory $loaderFactory, User $user, Translator $translator = null)
 	{
 		$this->itemsFactory = $itemsFactory;
 		$this->loaderFactory = $loaderFactory;
@@ -112,6 +112,9 @@ class AdminControl extends Control
 	}
 
 
+    /**
+     * @param array<string, mixed> $options
+     */
 	public function render(array $options = []): void
 	{
 		$template = $this->getTemplate();
@@ -146,6 +149,9 @@ class AdminControl extends Control
 	}
 
 
+    /**
+     * @param array<string, mixed> $options
+     */
 	public function renderPanel(array $options = []): void
 	{
 		$this['navigation']->renderPanel($options);
@@ -275,7 +281,7 @@ class AdminControl extends Control
 	}
 
 
-	public function getUserImage(): string
+	public function getUserImage(): ?string
 	{
 		return $this->userImage;
 	}
@@ -301,7 +307,7 @@ class AdminControl extends Control
 	}
 
 
-	public function getContent()
+	public function getContent(): ?string
 	{
 		return $this->content;
 	}
@@ -314,7 +320,7 @@ class AdminControl extends Control
 	}
 
 
-	public function getHeader(): string
+	public function getHeader(): ?string
 	{
 		return $this->header;
 	}
@@ -327,7 +333,7 @@ class AdminControl extends Control
 	}
 
 
-	public function getFooter(): string
+	public function getFooter(): ?string
 	{
 		return $this->footer;
 	}
@@ -340,7 +346,7 @@ class AdminControl extends Control
 	}
 
 
-	public function getNavbar(): string
+	public function getNavbar(): ?string
 	{
 		return $this->navbar;
 	}
@@ -379,7 +385,7 @@ class AdminControl extends Control
 	}
 
 
-	public function getProfileUrl(): string
+	public function getProfileUrl(): ?string
 	{
 		return $this->profileUrl;
 	}

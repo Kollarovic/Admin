@@ -10,12 +10,17 @@ use Kollarovic\Admin\ILoginControlFactory;
 use Kollarovic\Admin\LoaderFactory;
 use Kollarovic\Admin\LoginFormFactory;
 use Nette;
+use Nette\DI\ContainerBuilder;
 use Nextras\FormsRendering\Renderers\Bs3FormRenderer;
 
 
 class Extension extends Nette\DI\CompilerExtension
 {
-	private function getDefaultConfig($builder)
+
+    /**
+     * @return array<string, mixed>
+     */
+	private function getDefaultConfig(ContainerBuilder $builder): array
 	{
 		return [
 			'wwwDir' => $builder->parameters['wwwDir'],
@@ -50,7 +55,7 @@ class Extension extends Nette\DI\CompilerExtension
 	}
 
 
-	public function loadConfiguration()
+	public function loadConfiguration(): void
 	{
 		$builder = $this->getContainerBuilder();
 		$config = $this->validateConfig($this->getDefaultConfig($builder));

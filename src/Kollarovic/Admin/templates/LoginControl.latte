@@ -19,8 +19,8 @@
 		<div class="login-logo" n:if="$pageName">
 			<b>{_$pageName}</b>
 		</div>
-		<div class="login-box-body" n:if="$pageMsg">
-			<p class="login-box-msg">{_$pageMsg}</p>
+		<div class="login-box-body">
+			<p class="login-box-msg" n:if="$pageMsg">{_$pageMsg}</p>
 			{form form}
 				<div n:foreach="$form->errors as $error" class="alert alert-error fade in">
 					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>

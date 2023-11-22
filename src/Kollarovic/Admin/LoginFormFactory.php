@@ -14,13 +14,13 @@ use Nette\Security\User;
 class LoginFormFactory implements ILoginFormFactory
 {
 	/** @var User */
-	private $user;
+	private User $user;
 
 	/** @var bool */
-	private $useEmail;
+	private bool $useEmail;
 
 	/** @var IBaseFormFactory */
-	private $baseFormFactory;
+	private IBaseFormFactory $baseFormFactory;
 
 
 	public function __construct(User $user, IBaseFormFactory $baseFormFactory, bool $useEmail)
