@@ -17,10 +17,10 @@ use Nette\UnexpectedValueException;
 
 class AdminControl extends Control
 {
-    /** @var array<callable(self): void> */
-    public array $onLoggedOut = [];
+	/** @var array<callable(self): void> */
+	public array $onLoggedOut = [];
 
-    /** @var array<callable(self): void> */
+	/** @var array<callable(self): void> */
 	public array $onSearch = [];
 
 	/** @var ItemsFactory */
@@ -36,7 +36,7 @@ class AdminControl extends Control
 	private User $user;
 
 	/** @var string */
-    private string $templateFile;
+	private string $templateFile;
 
 	/** @var string */
 	private string $pageTitle = 'Admin';
@@ -112,9 +112,9 @@ class AdminControl extends Control
 	}
 
 
-    /**
-     * @param array<string, mixed> $options
-     */
+	/**
+	 * @param array<string, mixed> $options
+	 */
 	public function render(array $options = []): void
 	{
 		$template = $this->getTemplate();
@@ -123,7 +123,7 @@ class AdminControl extends Control
 			throw new UnexpectedValueException();
 		}
 
-        $template->setTranslator($this->translator ? $this->translator : new FallbackTranslator());
+		$template->setTranslator($this->translator ? $this->translator : new FallbackTranslator());
 		$template->setFile($this->getTemplateFile());
 		$template->pageTitle = $this->pageTitle;
 		$template->skin = $this->skin;
@@ -149,9 +149,9 @@ class AdminControl extends Control
 	}
 
 
-    /**
-     * @param array<string, mixed> $options
-     */
+	/**
+	 * @param array<string, mixed> $options
+	 */
 	public function renderPanel(array $options = []): void
 	{
 		$this['navigation']->renderPanel($options);

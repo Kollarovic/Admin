@@ -13,7 +13,7 @@ use Nette\UnexpectedValueException;
 
 class LoginControl extends Control
 {
-    /** @var array<callable(self): void> */
+	/** @var array<callable(self): void> */
 	public array $onLoggedIn = [];
 
 	/** @var ILoginFormFactory */
@@ -25,10 +25,10 @@ class LoginControl extends Control
 	/** @var ?Translator */
 	private ?Translator $translator;
 
-    /** @var string */
-    private string $templateFile;
+	/** @var string */
+	private string $templateFile;
 
-    /** @var string */
+	/** @var string */
 	private string $pageTitle = 'Login - Admin';
 
 	/** @var ?string */
@@ -74,9 +74,9 @@ class LoginControl extends Control
 	}
 
 
-    /**
-     * @param array<string, mixed> $options
-     */
+	/**
+	 * @param array<string, mixed> $options
+	 */
 	public function render(array $options = []): void
 	{
 		$template = $this->getTemplate();
@@ -85,7 +85,7 @@ class LoginControl extends Control
 			throw new UnexpectedValueException();
 		}
 
-        $template->setTranslator($this->translator ? $this->translator : new FallbackTranslator());
+		$template->setTranslator($this->translator ? $this->translator : new FallbackTranslator());
 		$template->setFile($this->getTemplateFile());
 		$template->pageTitle = $this->pageTitle;
 		$template->pageName = $this->pageName;

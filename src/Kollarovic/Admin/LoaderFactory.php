@@ -27,9 +27,9 @@ class LoaderFactory implements ILoaderFactory
 	}
 
 
-    /**
-     * @return array<string, string>
-     */
+	/**
+	 * @return array<string, string>
+	 */
 	public function getFiles(): array
 	{
 		return $this->files;

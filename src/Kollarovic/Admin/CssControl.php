@@ -14,9 +14,9 @@ class CssControl extends Control
 	private $files;
 
 
-    /**
-     * @param array<string, string> $files
-     */
+	/**
+	 * @param array<string, string> $files
+	 */
 	public function __construct(array $files)
 	{
 		$this->files = $files;
