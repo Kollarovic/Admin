@@ -20,7 +20,7 @@ class LoginControlTest extends TestCase
 		$html = ob_get_clean();
 
 		$dom = DomQuery::fromHtml($html);
-		Assert::true($dom->has('html'));
+		Assert::true($dom->has('body'));
 		Assert::true($dom->has('form'));
 	}
 }
