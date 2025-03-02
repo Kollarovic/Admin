@@ -26,7 +26,10 @@ class LoginControl extends Control
 	private ?Translator $translator;
 
 	/** @var string */
-	private string $templateFile;
+	private string $templateType = 'AdminLte2';
+
+	/** @var ?string */
+	private ?string $templateFile = null;
 
 	/** @var string */
 	private string $pageTitle = 'Login - Admin';
@@ -52,7 +55,6 @@ class LoginControl extends Control
 		$this->loginFormFactory = $loginFormFactory;
 		$this->loaderFactory = $loaderFactory;
 		$this->translator = $translator;
-		$this->templateFile = __DIR__ . '/templates/LoginControl.latte';
 	}
 
 
@@ -61,9 +63,21 @@ class LoginControl extends Control
 	 ********************************************************************************/
 
 
+	public function getTemplateType(): string
+	{
+		return $this->templateType;
+	}
+
+	public function setTemplateType(string $templateType): self
+	{
+		$this->templateType = $templateType;
+		return $this;
+	}
+
+
 	public function getTemplateFile(): string
 	{
-		return $this->templateFile;
+		return $this->templateFile ?? __DIR__ . "/templates/{$this->templateType}/LoginControl.latte";
 	}
 
 
