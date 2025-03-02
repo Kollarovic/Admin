@@ -36,7 +36,10 @@ class AdminControl extends Control
 	private User $user;
 
 	/** @var string */
-	private string $templateFile;
+	private string $templateType = 'AdminLte2';
+
+	/** @var ?string */
+	private ?string $templateFile = null;
 
 	/** @var string */
 	private string $pageTitle = 'Admin';
@@ -90,7 +93,6 @@ class AdminControl extends Control
 		$this->loaderFactory = $loaderFactory;
 		$this->user = $user;
 		$this->translator = $translator;
-		$this->templateFile = __DIR__ . '/templates/AdminControl.latte';
 	}
 
 
@@ -99,9 +101,21 @@ class AdminControl extends Control
 	 ********************************************************************************/
 
 
+	public function getTemplateType(): string
+	{
+		return $this->templateType;
+	}
+
+	public function setTemplateType(string $templateType): self
+	{
+		$this->templateType = $templateType;
+		return $this;
+	}
+
+
 	public function getTemplateFile(): string
 	{
-		return $this->templateFile;
+		return $this->templateFile ?? __DIR__ . "/templates/{$this->templateType}/AdminControl.latte";
 	}
 
 
