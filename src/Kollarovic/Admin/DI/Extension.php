@@ -22,6 +22,17 @@ class Extension extends Nette\DI\CompilerExtension
 	 */
 	private function getDefaultConfig(ContainerBuilder $builder): array
 	{
+		$adminLte2Files = [
+			'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css',
+			'https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css',
+			'https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.4.10/css/AdminLTE.min.css',
+			'https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.4.10/css/skins/_all-skins.min.css',
+
+			'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js',
+			'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js',
+			'https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.4.10/js/adminlte.min.js',
+		];
+
 		return [
 			'wwwDir' => $builder->parameters['wwwDir'],
 			'name' => 'Admin',
@@ -32,16 +43,8 @@ class Extension extends Nette\DI\CompilerExtension
 			'footer' => '',
 			'ajax' => false,
 			'defaultFiles' => [
-				'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css',
-				'https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css',
-				'https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.4.10/css/AdminLTE.min.css',
-				'https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.4.10/css/skins/_all-skins.min.css',
-
-				'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js',
-				'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js',
-				'https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.4.10/js/adminlte.min.js',
+				'AdminLte2' => $adminLte2Files,
 			],
-
 			'files' => [],
 			'navigation' => 'admin',
 			'login' => [
@@ -67,7 +70,8 @@ class Extension extends Nette\DI\CompilerExtension
 		$loaderFactory = $builder->addDefinition($this->prefix('loaderFactory'))
 			->setFactory(LoaderFactory::class);
 
-		foreach (array_merge($config['defaultFiles'], $config['files']) as $file) {
+		$defaultFiles = $config['defaultFiles'][$config['templateType']];
+		foreach (array_merge($defaultFiles, $config['files']) as $file) {
 			$loaderFactory->addSetup('addFile', [$file]);
 		}
 
