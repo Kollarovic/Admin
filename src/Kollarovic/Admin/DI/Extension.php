@@ -26,6 +26,7 @@ class Extension extends Nette\DI\CompilerExtension
 			'wwwDir' => $builder->parameters['wwwDir'],
 			'name' => 'Admin',
 			'shortName' => 'A',
+			'templateType' => 'AdminLte2',
 			'skin' => 'red',
 			'header' => '',
 			'footer' => '',
@@ -85,6 +86,7 @@ class Extension extends Nette\DI\CompilerExtension
 		$builder->addFactoryDefinition($this->prefix('loginControlFactory'))
 			->setImplement(ILoginControlFactory::class)
 			->getResultDefinition()
+			->addSetup('setTemplateType', [$config['templateType']])
 			->addSetup('setPageTitle', [$config['login']['pageTitle']])
 			->addSetup('setPageName', [$config['login']['pageName']])
 			->addSetup('setPageMsg', [$config['login']['pageMsg']])
@@ -94,6 +96,7 @@ class Extension extends Nette\DI\CompilerExtension
 		$builder->addFactoryDefinition($this->prefix('adminControlFactory'))
 			->setImplement(IAdminControlFactory::class)
 			->getResultDefinition()
+			->addSetup('setTemplateType', [$config['templateType']])
 			->addSetup('setSkin', [$config['skin']])
 			->addSetup('setAdminName', [$config['name']])
 			->addSetup('setAdminShortName', [$config['shortName']])
