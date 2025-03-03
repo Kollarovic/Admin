@@ -9,7 +9,7 @@
 	{if $pageTitle}
 		<title>{$pageTitle}</title>
 	{else}
-		<title>{control navigation:title} - {_$adminName}</title>
+		<title>{control title} - {_$adminName}</title>
 	{/if}
 
 	{control css}
@@ -100,15 +100,15 @@
 					<br>
 				{/if}
 				{snippet menu}
-					{block menu}{control navigation:menu class => 'sidebar-menu', subclass => 'treeview-menu', openClass => 'active', dropdownClass => 'treeview', open => true, ajax => $ajax}{/block}
+					{block menu}{control menu class => 'sidebar-menu', subclass => 'treeview-menu', openClass => 'active', dropdownClass => 'treeview', open => true, ajax => $ajax}{/block}
 				{/snippet}
 			</section>
 		</aside>
 
 		<div class="content-wrapper">
 			<section class="content-header" n:snippet="breadcrumb">
-				<h1>{if $pageName}{$pageName}{else}{control navigation:title}{/if}</h1>
-				{block breadcrumb}{control navigation:breadcrumb ajax => $ajax}{/block}
+				<h1>{if $pageName}{$pageName}{else}{control title}{/if}</h1>
+				{block breadcrumb}{control breadcrumb ajax => $ajax}{/block}
 			</section>
 			<section class="content">
 				{snippet flash}

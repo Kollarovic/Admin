@@ -4,9 +4,13 @@ declare(strict_types=1);
 
 namespace Kollarovic\Admin;
 
+use Kollarovic\Navigation\BreadcrumbControl;
 use Kollarovic\Navigation\Item;
 use Kollarovic\Navigation\ItemsFactory;
+use Kollarovic\Navigation\MenuControl;
 use Kollarovic\Navigation\NavigationControl;
+use Kollarovic\Navigation\PanelControl;
+use Kollarovic\Navigation\TitleControl;
 use Nette\Application\UI\Control;
 use Nette\Application\UI\Form;
 use Nette\Bridges\ApplicationLatte\Template;
@@ -169,7 +173,7 @@ class AdminControl extends Control
 	 */
 	public function renderPanel(array $options = []): void
 	{
-		$this['navigation']->renderPanel($options);
+		$this['panel']->render($options);
 	}
 
 
@@ -213,10 +217,27 @@ class AdminControl extends Control
 	}
 
 
-	protected function createComponentNavigation(): NavigationControl
+	protected function createComponentMenu(): MenuControl
 	{
-		$navigation = new NavigationControl($this->getRootItem(), $this->translator);
-		return $navigation;
+		return new MenuControl($this->getRootItem(), $this->translator);
+	}
+
+
+	protected function createComponentBreadcrumb(): BreadcrumbControl
+	{
+		return new BreadcrumbControl($this->getRootItem(), $this->translator);
+	}
+
+
+	protected function createComponentPanel(): PanelControl
+	{
+		return new PanelControl($this->getRootItem(), $this->translator);
+	}
+
+
+	protected function createComponentTitle(): TitleControl
+	{
+		return new TitleControl($this->getRootItem(), $this->translator);
 	}
 
 
