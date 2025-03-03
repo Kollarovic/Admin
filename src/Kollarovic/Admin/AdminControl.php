@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Kollarovic\Admin;
 
+use Kollarovic\Navigation\BaseControl;
 use Kollarovic\Navigation\BreadcrumbControl;
 use Kollarovic\Navigation\Item;
 use Kollarovic\Navigation\ItemsFactory;
 use Kollarovic\Navigation\MenuControl;
-use Kollarovic\Navigation\NavigationControl;
 use Kollarovic\Navigation\PanelControl;
 use Kollarovic\Navigation\TitleControl;
 use Nette\Application\UI\Control;
@@ -17,6 +17,7 @@ use Nette\Bridges\ApplicationLatte\Template;
 use Nette\Localization\Translator;
 use Nette\Security\User;
 use Nette\UnexpectedValueException;
+use ReflectionClass;
 
 
 class AdminControl extends Control
@@ -120,7 +121,7 @@ class AdminControl extends Control
 
 	public function getTemplateFile(): string
 	{
-		return $this->templateFile ?? __DIR__ . "/templates/{$this->templateType}/AdminControl.latte";
+		return $this->templateFile ?? $this->buildTemplateFilePath('AdminControl');
 	}
 
 
@@ -217,27 +218,38 @@ class AdminControl extends Control
 	}
 
 
-	protected function createComponentMenu(): MenuControl
+	protected function createComponentMenu(): BaseControl
 	{
-		return new MenuControl($this->getRootItem(), $this->translator);
+		return $this->initializeTemplate(new MenuControl($this->getRootItem(), $this->translator));
 	}
 
 
-	protected function createComponentBreadcrumb(): BreadcrumbControl
+	protected function createComponentBreadcrumb(): BaseControl
 	{
-		return new BreadcrumbControl($this->getRootItem(), $this->translator);
+		return $this->initializeTemplate(new BreadcrumbControl($this->getRootItem(), $this->translator));
 	}
 
 
-	protected function createComponentPanel(): PanelControl
+	protected function createComponentPanel(): BaseControl
 	{
-		return new PanelControl($this->getRootItem(), $this->translator);
+		return $this->initializeTemplate(new PanelControl($this->getRootItem(), $this->translator));
 	}
 
 
-	protected function createComponentTitle(): TitleControl
+	protected function createComponentTitle(): BaseControl
 	{
-		return new TitleControl($this->getRootItem(), $this->translator);
+		return $this->initializeTemplate(new TitleControl($this->getRootItem(), $this->translator));
+	}
+
+
+	private function initializeTemplate(BaseControl $baseControl): BaseControl
+	{
+		$reflection = new ReflectionClass($baseControl);
+		$templateFile = $this->buildTemplateFilePath($reflection->getShortName());
+		if (is_file($templateFile)) {
+			$baseControl->setTemplateFile($templateFile);
+		}
+		return $baseControl;
 	}
 
 
@@ -445,4 +457,11 @@ class AdminControl extends Control
 		$this->ajaxRequest = $ajaxRequest;
 		return $this;
 	}
+
+
+	private function buildTemplateFilePath(string $componentName): string
+	{
+		return __DIR__ . "/templates/{$this->templateType}/{$componentName}.latte";
+	}
+
 }
