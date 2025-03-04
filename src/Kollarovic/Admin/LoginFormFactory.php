@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Kollarovic\Admin;
 
 use Kollarovic\Admin\Form\IBaseFormFactory;
-use Nette;
 use Nette\Application\UI\Form;
 use Nette\Security\AuthenticationException;
 use Nette\Security\User;
+use Nette\Utils\ArrayHash;
 
 
 class LoginFormFactory implements ILoginFormFactory
@@ -36,10 +36,9 @@ class LoginFormFactory implements ILoginFormFactory
 		$form = $this->baseFormFactory->create();
 
 		if ($this->useEmail) {
-			$form->addText('username', 'Email')
+			$form->addEmail('username', 'Email')
 				->setHtmlAttribute('placeholder', 'Email')
-				->setRequired('Please enter your email.')
-				->addRule(Form::EMAIL, 'Please enter a valid email address.');
+				->setRequired('Please enter your email.');
 		} else {
 			$form->addText('username', 'Username')
 				->setHtmlAttribute('placeholder', 'Username')
@@ -57,17 +56,11 @@ class LoginFormFactory implements ILoginFormFactory
 	}
 
 
-	public function process(Nette\Forms\Form $form): void
+	public function process(Form $form, ArrayHash $values): void
 	{
-		$values = $form->values;
 		try {
-			if ($values->remember) {
-				$this->user->setExpiration('14 days');
-			} else {
-				$this->user->setExpiration(null);
-			}
+			$this->user->setExpiration($values->remember ? '14 days' : null);
 			$this->user->login($values->username, $values->password);
-
 		} catch (AuthenticationException $e) {
 			$form->addError($e->getMessage());
 		}
