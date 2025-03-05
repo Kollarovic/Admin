@@ -10,16 +10,11 @@ use Nette\Utils\Html;
 
 class CssControl extends Control
 {
-	/** @var array<string, string> */
-	private $files;
-
-
 	/**
 	 * @param array<string, string> $files
 	 */
-	public function __construct(array $files)
+	public function __construct(private array $files)
 	{
-		$this->files = $files;
 	}
 
 
