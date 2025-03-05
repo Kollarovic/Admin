@@ -15,26 +15,12 @@ class LoginControl extends Control
 {
 	/** @var array<callable(self): void> */
 	public array $onLoggedIn = [];
-
-	/** @var string */
 	private string $templateType = 'AdminLte2';
-
-	/** @var ?string */
 	private ?string $templateFile = null;
-
-	/** @var string */
 	private string $pageTitle = 'Login - Admin';
-
-	/** @var ?string */
 	private ?string $pageName = 'Admin';
-
-	/** @var ?string */
 	private ?string $pageMsg = null;
-
-	/** @var ?string */
 	private ?string $usernameIcon = null;
-
-	/** @var ?string */
 	private ?string $passwordIcon = null;
 
 
