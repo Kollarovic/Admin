@@ -28,18 +28,6 @@ class AdminControl extends Control
 	/** @var array<callable(self): void> */
 	public array $onSearch = [];
 
-	/** @var ItemsFactory */
-	private ItemsFactory $itemsFactory;
-
-	/** @var ILoaderFactory */
-	private ILoaderFactory $loaderFactory;
-
-	/** @var ?Translator */
-	private ?Translator $translator;
-
-	/** @var User */
-	private User $user;
-
 	/** @var string */
 	private string $templateType = 'AdminLte2';
 
@@ -92,12 +80,12 @@ class AdminControl extends Control
 	private bool $ajaxRequest = false;
 
 
-	public function __construct(ItemsFactory $itemsFactory, ILoaderFactory $loaderFactory, User $user, Translator $translator = null)
-	{
-		$this->itemsFactory = $itemsFactory;
-		$this->loaderFactory = $loaderFactory;
-		$this->user = $user;
-		$this->translator = $translator;
+	public function __construct(
+		private ItemsFactory $itemsFactory,
+		private ILoaderFactory $loaderFactory,
+		private User $user,
+		private ?Translator $translator = null
+	) {
 	}
 
 
