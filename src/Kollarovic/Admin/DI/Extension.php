@@ -33,6 +33,17 @@ class Extension extends Nette\DI\CompilerExtension
 			'https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.4.10/js/adminlte.min.js',
 		];
 
+		$adminLte3Files = [
+			'https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css',
+			'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css',
+			'https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css',
+			'https://cdn.jsdelivr.net/npm/admin-lte@3.2/plugins/icheck-bootstrap/icheck-bootstrap.min.css',
+
+			'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js',
+			'https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js',
+			'https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js',
+		];
+
 		return [
 			'wwwDir' => $builder->parameters['wwwDir'],
 			'name' => 'Admin',
@@ -44,6 +55,7 @@ class Extension extends Nette\DI\CompilerExtension
 			'ajax' => false,
 			'defaultFiles' => [
 				'AdminLte2' => $adminLte2Files,
+				'AdminLte3' => $adminLte3Files,
 			],
 			'files' => [],
 			'navigation' => 'admin',
