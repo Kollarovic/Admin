@@ -16,15 +16,6 @@ class LoginControl extends Control
 	/** @var array<callable(self): void> */
 	public array $onLoggedIn = [];
 
-	/** @var ILoginFormFactory */
-	private ILoginFormFactory $loginFormFactory;
-
-	/** @var ILoaderFactory */
-	private ILoaderFactory $loaderFactory;
-
-	/** @var ?Translator */
-	private ?Translator $translator;
-
 	/** @var string */
 	private string $templateType = 'AdminLte2';
 
@@ -48,13 +39,10 @@ class LoginControl extends Control
 
 
 	public function __construct(
-		ILoginFormFactory $loginFormFactory,
-		ILoaderFactory $loaderFactory,
-		Translator $translator = null
+		private ILoginFormFactory $loginFormFactory,
+		private ILoaderFactory $loaderFactory,
+		private ?Translator $translator = null
 	) {
-		$this->loginFormFactory = $loginFormFactory;
-		$this->loaderFactory = $loaderFactory;
-		$this->translator = $translator;
 	}
 
 
