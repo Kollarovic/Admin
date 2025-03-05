@@ -21,6 +21,7 @@ class LoginControl extends Control
 	private ?string $pageName = 'Admin';
 	private ?string $pageMsg = null;
 
+
 	public function __construct(
 		private ILoginFormFactory $loginFormFactory,
 		private ILoaderFactory $loaderFactory,
