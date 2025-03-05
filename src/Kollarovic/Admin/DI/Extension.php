@@ -63,8 +63,6 @@ class Extension extends Nette\DI\CompilerExtension
 				'pageTitle' => 'Login - Admin',
 				'pageName' => 'Admin',
 				'pageMsg' => 'Authentication',
-				'usernameIcon' => null,
-				'passwordIcon' => 'lock',
 				'email' => true,
 			],
 		];
@@ -75,9 +73,6 @@ class Extension extends Nette\DI\CompilerExtension
 	{
 		$builder = $this->getContainerBuilder();
 		$config = $this->validateConfig($this->getDefaultConfig($builder));
-		if (empty($config['login']['usernameIcon'])) {
-			$config['login']['usernameIcon'] = $config['login']['email'] ? 'envelope' : 'user';
-		}
 
 		$loaderFactory = $builder->addDefinition($this->prefix('loaderFactory'))
 			->setFactory(LoaderFactory::class);
@@ -105,9 +100,7 @@ class Extension extends Nette\DI\CompilerExtension
 			->addSetup('setTemplateType', [$config['templateType']])
 			->addSetup('setPageTitle', [$config['login']['pageTitle']])
 			->addSetup('setPageName', [$config['login']['pageName']])
-			->addSetup('setPageMsg', [$config['login']['pageMsg']])
-			->addSetup('setUsernameIcon', [$config['login']['usernameIcon']])
-			->addSetup('setPasswordIcon', [$config['login']['passwordIcon']]);
+			->addSetup('setPageMsg', [$config['login']['pageMsg']]);
 
 		$builder->addFactoryDefinition($this->prefix('adminControlFactory'))
 			->setImplement(IAdminControlFactory::class)

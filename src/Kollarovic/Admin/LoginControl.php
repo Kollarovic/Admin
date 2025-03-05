@@ -20,9 +20,6 @@ class LoginControl extends Control
 	private string $pageTitle = 'Login - Admin';
 	private ?string $pageName = 'Admin';
 	private ?string $pageMsg = null;
-	private ?string $usernameIcon = null;
-	private ?string $passwordIcon = null;
-
 
 	public function __construct(
 		private ILoginFormFactory $loginFormFactory,
@@ -78,8 +75,6 @@ class LoginControl extends Control
 		$template->pageTitle = $this->pageTitle;
 		$template->pageName = $this->pageName;
 		$template->pageMsg = $this->pageMsg;
-		$template->usernameIcon = $this->usernameIcon;
-		$template->passwordIcon = $this->passwordIcon;
 
 		foreach ($options as $key => $value) {
 			$template->$key = $value;
@@ -158,29 +153,4 @@ class LoginControl extends Control
 		return $this;
 	}
 
-
-	public function getUsernameIcon(): ?string
-	{
-		return $this->usernameIcon;
-	}
-
-
-	public function setUsernameIcon(string $usernameIcon): self
-	{
-		$this->usernameIcon = $usernameIcon;
-		return $this;
-	}
-
-
-	public function getPasswordIcon(): ?string
-	{
-		return $this->passwordIcon;
-	}
-
-
-	public function setPasswordIcon(string $passwordIcon): self
-	{
-		$this->passwordIcon = $passwordIcon;
-		return $this;
-	}
 }
