@@ -28,55 +28,22 @@ class AdminControl extends Control
 	/** @var array<callable(self): void> */
 	public array $onSearch = [];
 
-	/** @var string */
 	private string $templateType = 'AdminLte2';
-
-	/** @var ?string */
 	private ?string $templateFile = null;
-
-	/** @var string */
 	private string $pageTitle = 'Admin';
-
-	/** @var string */
 	private string $skin = 'red';
-
-	/** @var string */
 	private string $adminName = 'Admin';
-
-	/** @var string */
 	private string $adminShortName = 'A';
-
-	/** @var string */
 	private string $userName = 'Admin';
-
-	/** @var ?string */
 	private ?string $userImage = null;
-
-	/** @var string */
 	private string $pageName = 'Admin';
-
-	/** @var ?string */
 	private ?string $content = null;
-
-	/** @var ?string */
 	private ?string $header = null;
-
-	/** @var ?string */
 	private ?string $footer = null;
-
-	/** @var ?string */
 	private ?string $navbar = null;
-
-	/** @var string */
 	private string $navigationName = 'admin';
-
-	/** @var bool */
 	private bool $sidebarCollapse = false;
-
-	/** @var ?string */
 	private ?string $profileUrl = null;
-
-	/** @var bool */
 	private bool $ajaxRequest = false;
 
 
