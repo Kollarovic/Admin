@@ -7,7 +7,7 @@ namespace Kollarovic\Admin\Form;
 use Nette\Application\UI\Form;
 
 
-interface IBaseFormFactory
+interface FormFactory
 {
 	public function create(): Form;
 }

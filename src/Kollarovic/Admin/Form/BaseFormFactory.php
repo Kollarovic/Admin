@@ -9,7 +9,7 @@ use Nette\Forms\FormRenderer;
 use Nette\Localization\Translator;
 
 
-class BaseFormFactory implements IBaseFormFactory
+class BaseFormFactory implements FormFactory
 {
 	public function __construct(
 		private FormRenderer $formRenderer,
