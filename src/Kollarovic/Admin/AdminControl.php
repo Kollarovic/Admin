@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Kollarovic\Admin;
 
 use Kollarovic\Admin\Loader\ILoaderFactory;
+use Kollarovic\Admin\Translator\FallbackTranslator;
 use Kollarovic\Navigation\BaseControl;
 use Kollarovic\Navigation\BreadcrumbControl;
 use Kollarovic\Navigation\Item;

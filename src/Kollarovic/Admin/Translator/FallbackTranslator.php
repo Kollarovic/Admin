@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Kollarovic\Admin;
+namespace Kollarovic\Admin\Translator;
 
 use Nette\Localization\Translator;
 
