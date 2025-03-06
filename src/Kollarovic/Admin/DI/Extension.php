@@ -8,7 +8,7 @@ use Kollarovic\Admin\Form\BaseFormFactory;
 use Kollarovic\Admin\Form\LoginFormFactory;
 use Kollarovic\Admin\IAdminControlFactory;
 use Kollarovic\Admin\ILoginControlFactory;
-use Kollarovic\Admin\LoaderFactory;
+use Kollarovic\Admin\Loader\LoaderFactory;
 use Nette;
 use Nette\DI\ContainerBuilder;
 use Nextras\FormsRendering\Renderers\Bs3FormRenderer;

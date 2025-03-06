@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Kollarovic\Admin;
 
 use Kollarovic\Admin\Form\ILoginFormFactory;
+use Kollarovic\Admin\Loader\ILoaderFactory;
 use Nette\Application\UI\Control;
 use Nette\Application\UI\Form;
 use Nette\Bridges\ApplicationLatte\Template;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Kollarovic\Admin;
+namespace Kollarovic\Admin\Loader;
 
 use Nette\Application\UI\Control;
 
