@@ -44,6 +44,7 @@ class LoginControl extends Control
 		return $this->templateType;
 	}
 
+
 	public function setTemplateType(string $templateType): self
 	{
 		$this->templateType = $templateType;
