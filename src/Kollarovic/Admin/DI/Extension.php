@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Kollarovic\Admin\DI;
 
 use Kollarovic\Admin\Form\BaseFormFactory;
-use Kollarovic\Admin\Form\LoginFormFactory;
+use Kollarovic\Admin\Form\DefaultLoginFormFactory;
 use Kollarovic\Admin\AdminControlFactory;
 use Kollarovic\Admin\LoginControlFactory;
 use Kollarovic\Admin\Loader\DefaultLoaderFactory;
@@ -92,7 +92,7 @@ class Extension extends Nette\DI\CompilerExtension
 			]);
 
 		$builder->addDefinition($this->prefix('loginFormFactory'))
-			->setFactory(LoginFormFactory::class, ['useEmail' => $config['login']['email']]);
+			->setFactory(DefaultLoginFormFactory::class, ['useEmail' => $config['login']['email']]);
 
 		$builder->addFactoryDefinition($this->prefix('loginControlFactory'))
 			->setImplement(LoginControlFactory::class)

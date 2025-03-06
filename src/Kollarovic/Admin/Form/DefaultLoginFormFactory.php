@@ -10,7 +10,7 @@ use Nette\Security\User;
 use Nette\Utils\ArrayHash;
 
 
-class LoginFormFactory implements ILoginFormFactory
+class DefaultLoginFormFactory implements ILoginFormFactory
 {
 	public function __construct(
 		private User        $user,
