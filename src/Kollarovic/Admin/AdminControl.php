@@ -94,35 +94,29 @@ class AdminControl extends Control
 	 */
 	public function render(array $options = []): void
 	{
-		$template = $this->getTemplate();
-
-		if (!$template instanceof Template) {
-			throw new UnexpectedValueException();
-		}
-
-		$template->setTranslator($this->translator ? $this->translator : new FallbackTranslator());
-		$template->setFile($this->getTemplateFile());
-		$template->pageTitle = $this->pageTitle;
-		$template->skin = $this->skin;
-		$template->profileUrl = $this->profileUrl;
-		$template->userName = $this->userName;
-		$template->userImage = $this->userImage;
-		$template->adminName = $this->adminName;
-		$template->adminShortName = $this->adminShortName;
-		$template->pageName = $this->pageName;
-		$template->content = $this->content;
-		$template->header = $this->header;
-		$template->footer = $this->footer;
-		$template->navbar = $this->navbar;
-		$template->ajax = $this->ajaxRequest;
-		$template->rootItem = $this->getRootItem();
-		$template->showSearchForm = (bool) $this->onSearch;
-		$template->sidebarCollapse = $this->sidebarCollapse;
+		$this->template->setTranslator($this->translator ?? new FallbackTranslator());
+		$this->template->setFile($this->getTemplateFile());
+		$this->template->pageTitle = $this->pageTitle;
+		$this->template->skin = $this->skin;
+		$this->template->profileUrl = $this->profileUrl;
+		$this->template->userName = $this->userName;
+		$this->template->userImage = $this->userImage;
+		$this->template->adminName = $this->adminName;
+		$this->template->adminShortName = $this->adminShortName;
+		$this->template->pageName = $this->pageName;
+		$this->template->content = $this->content;
+		$this->template->header = $this->header;
+		$this->template->footer = $this->footer;
+		$this->template->navbar = $this->navbar;
+		$this->template->ajax = $this->ajaxRequest;
+		$this->template->rootItem = $this->getRootItem();
+		$this->template->showSearchForm = (bool) $this->onSearch;
+		$this->template->sidebarCollapse = $this->sidebarCollapse;
 
 		foreach ($options as $key => $value) {
-			$template->$key = $value;
+			$this->template->$key = $value;
 		}
-		$template->render();
+		$this->template->render();
 	}
 
 
