@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Kollarovic\Admin;
 
-use Kollarovic\Admin\Form\ILoginFormFactory;
+use Kollarovic\Admin\Form\LoginFormFactory;
 use Kollarovic\Admin\Loader\LoaderFactory;
 use Kollarovic\Admin\Translator\FallbackTranslator;
 use Nette\Application\UI\Control;
@@ -26,9 +26,9 @@ class LoginControl extends Control
 
 
 	public function __construct(
-		private ILoginFormFactory $loginFormFactory,
-		private LoaderFactory     $loaderFactory,
-		private ?Translator       $translator = null
+		private LoginFormFactory $loginFormFactory,
+		private LoaderFactory    $loaderFactory,
+		private ?Translator      $translator = null
 	) {
 	}
 
