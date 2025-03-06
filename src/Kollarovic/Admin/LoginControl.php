@@ -120,7 +120,7 @@ class LoginControl extends Control
 	}
 
 
-	public function setPageTitle(string $pageTitle): self
+	public function setPageTitle(string $pageTitle): static
 	{
 		$this->pageTitle = $pageTitle;
 		return $this;
@@ -133,7 +133,7 @@ class LoginControl extends Control
 	}
 
 
-	public function setPageName(string $pageName): self
+	public function setPageName(?string $pageName): static
 	{
 		$this->pageName = $pageName;
 		return $this;
@@ -146,7 +146,7 @@ class LoginControl extends Control
 	}
 
 
-	public function setPageMsg(?string $pageMsg): self
+	public function setPageMsg(?string $pageMsg): static
 	{
 		$this->pageMsg = $pageMsg;
 		return $this;
