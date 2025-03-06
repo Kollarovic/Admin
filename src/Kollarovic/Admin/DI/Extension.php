@@ -45,7 +45,6 @@ class Extension extends Nette\DI\CompilerExtension
 		];
 
 		return [
-			'wwwDir' => $builder->parameters['wwwDir'],
 			'name' => 'Admin',
 			'shortName' => 'A',
 			'templateType' => 'AdminLte2',
