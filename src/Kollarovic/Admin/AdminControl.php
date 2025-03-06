@@ -70,7 +70,7 @@ class AdminControl extends Control
 	}
 
 
-	public function setTemplateType(string $templateType): self
+	public function setTemplateType(string $templateType): static
 	{
 		$this->templateType = $templateType;
 		return $this;
@@ -83,7 +83,7 @@ class AdminControl extends Control
 	}
 
 
-	public function setTemplateFile(string $templateFile): self
+	public function setTemplateFile(string $templateFile): static
 	{
 		$this->templateFile = $templateFile;
 		return $this;
@@ -222,7 +222,7 @@ class AdminControl extends Control
 	}
 
 
-	public function setPageTitle(?string $pageTitle): self
+	public function setPageTitle(?string $pageTitle): static
 	{
 		$this->pageTitle = $pageTitle;
 		return $this;
@@ -235,7 +235,7 @@ class AdminControl extends Control
 	}
 
 
-	public function setSkin(string $skin): self
+	public function setSkin(string $skin): static
 	{
 		$this->skin = $skin;
 		return $this;
@@ -248,7 +248,7 @@ class AdminControl extends Control
 	}
 
 
-	public function setAdminName(string $adminName): self
+	public function setAdminName(string $adminName): static
 	{
 		$this->adminName = $adminName;
 		return $this;
@@ -261,7 +261,7 @@ class AdminControl extends Control
 	}
 
 
-	public function setAdminShortName(string $adminShortName): self
+	public function setAdminShortName(string $adminShortName): static
 	{
 		$this->adminShortName = $adminShortName;
 		return $this;
@@ -274,7 +274,7 @@ class AdminControl extends Control
 	}
 
 
-	public function setUserName(string $userName): self
+	public function setUserName(string $userName): static
 	{
 		$this->userName = $userName;
 		return $this;
@@ -287,7 +287,7 @@ class AdminControl extends Control
 	}
 
 
-	public function setUserImage(string $userImage): self
+	public function setUserImage(string $userImage): static
 	{
 		$this->userImage = $userImage;
 		return $this;
@@ -300,7 +300,7 @@ class AdminControl extends Control
 	}
 
 
-	public function setPageName(?string $pageName): self
+	public function setPageName(?string $pageName): static
 	{
 		$this->pageName = $pageName;
 		return $this;
@@ -313,7 +313,7 @@ class AdminControl extends Control
 	}
 
 
-	public function setContent(string $content): self
+	public function setContent(string $content): static
 	{
 		$this->content = $content;
 		return $this;
@@ -326,7 +326,7 @@ class AdminControl extends Control
 	}
 
 
-	public function setHeader(string $header): self
+	public function setHeader(string $header): static
 	{
 		$this->header = $header;
 		return $this;
@@ -339,7 +339,7 @@ class AdminControl extends Control
 	}
 
 
-	public function setFooter(string $footer): self
+	public function setFooter(string $footer): static
 	{
 		$this->footer = $footer;
 		return $this;
@@ -352,7 +352,7 @@ class AdminControl extends Control
 	}
 
 
-	public function setNavbar(string $navbar): self
+	public function setNavbar(string $navbar): static
 	{
 		$this->navbar = $navbar;
 		return $this;
@@ -365,7 +365,7 @@ class AdminControl extends Control
 	}
 
 
-	public function setNavigationName(string $navigationName): self
+	public function setNavigationName(string $navigationName): static
 	{
 		$this->navigationName = $navigationName;
 		return $this;
@@ -378,7 +378,7 @@ class AdminControl extends Control
 	}
 
 
-	public function setSidebarCollapse(bool $sidebarCollapse): self
+	public function setSidebarCollapse(bool $sidebarCollapse): static
 	{
 		$this->sidebarCollapse = $sidebarCollapse;
 		return $this;
@@ -391,7 +391,7 @@ class AdminControl extends Control
 	}
 
 
-	public function setProfileUrl(string $profileUrl): self
+	public function setProfileUrl(string $profileUrl): static
 	{
 		$this->profileUrl = $profileUrl;
 		return $this;
@@ -404,7 +404,7 @@ class AdminControl extends Control
 	}
 
 
-	public function setAjaxRequest(bool $ajaxRequest): self
+	public function setAjaxRequest(bool $ajaxRequest): static
 	{
 		$this->ajaxRequest = $ajaxRequest;
 		return $this;
