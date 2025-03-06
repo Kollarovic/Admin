@@ -9,9 +9,7 @@ use Kollarovic\Admin\Loader\LoaderFactory;
 use Kollarovic\Admin\Translator\FallbackTranslator;
 use Nette\Application\UI\Control;
 use Nette\Application\UI\Form;
-use Nette\Bridges\ApplicationLatte\Template;
 use Nette\Localization\Translator;
-use Nette\UnexpectedValueException;
 
 
 /**
