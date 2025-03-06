@@ -7,7 +7,7 @@ namespace Kollarovic\Admin\Loader;
 use Nette\Application\UI\Control;
 
 
-interface ILoaderFactory
+interface LoaderFactory
 {
 	function createCssLoader(): Control;
 

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Kollarovic\Admin;
 
-use Kollarovic\Admin\Loader\ILoaderFactory;
+use Kollarovic\Admin\Loader\LoaderFactory;
 use Kollarovic\Admin\Translator\FallbackTranslator;
 use Kollarovic\Navigation\BaseControl;
 use Kollarovic\Navigation\BreadcrumbControl;
@@ -50,10 +50,10 @@ class AdminControl extends Control
 
 
 	public function __construct(
-		private ItemsFactory $itemsFactory,
-		private ILoaderFactory $loaderFactory,
-		private User $user,
-		private ?Translator $translator = null
+		private ItemsFactory  $itemsFactory,
+		private LoaderFactory $loaderFactory,
+		private User          $user,
+		private ?Translator   $translator = null
 	) {
 	}
 
