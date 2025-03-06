@@ -14,6 +14,9 @@ use Nette\Localization\Translator;
 use Nette\UnexpectedValueException;
 
 
+/**
+ * @property-read LoginTemplate $template
+ */
 class LoginControl extends Control
 {
 	/** @var array<callable(self): void> */
@@ -68,22 +71,16 @@ class LoginControl extends Control
 	 */
 	public function render(array $options = []): void
 	{
-		$template = $this->getTemplate();
-
-		if (!$template instanceof Template) {
-			throw new UnexpectedValueException();
-		}
-
-		$template->setTranslator($this->translator ? $this->translator : new FallbackTranslator());
-		$template->setFile($this->getTemplateFile());
-		$template->pageTitle = $this->pageTitle;
-		$template->pageName = $this->pageName;
-		$template->pageMsg = $this->pageMsg;
+		$this->template->setTranslator($this->translator ? $this->translator : new FallbackTranslator());
+		$this->template->setFile($this->getTemplateFile());
+		$this->template->pageTitle = $this->pageTitle;
+		$this->template->pageName = $this->pageName;
+		$this->template->pageMsg = $this->pageMsg;
 
 		foreach ($options as $key => $value) {
-			$template->$key = $value;
+			$this->template->$key = $value;
 		}
-		$template->render();
+		$this->template->render();
 	}
 
 
