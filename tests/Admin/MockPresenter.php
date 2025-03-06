@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Kollarovic\Admin\Test;
 
 use Kollarovic\Admin\AdminControlFactory;
-use Kollarovic\Admin\ILoginControlFactory;
+use Kollarovic\Admin\LoginControlFactory;
 use Nette\Application\UI\InvalidLinkException;
 use Nette\Application\UI\Presenter;
 use Nette\Security\Identity;
@@ -16,7 +16,7 @@ class MockPresenter extends Presenter
 	/** @var AdminControlFactory @inject */
 	public $adminControlFactory;
 
-	/** @var  ILoginControlFactory @inject */
+	/** @var  LoginControlFactory @inject */
 	public $loginControlFactory;
 
 	private $currentDestination = 'Setting:web';

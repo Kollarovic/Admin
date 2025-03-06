@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Kollarovic\Admin;
 
 
-interface ILoginControlFactory
+interface LoginControlFactory
 {
 	public function create(): LoginControl;
 }

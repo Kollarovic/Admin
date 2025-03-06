@@ -94,14 +94,14 @@ SignPresenter
 
 namespace App\BackendModule\Presenters;
 
-use Kollarovic\Admin\ILoginControlFactory;
+use Kollarovic\Admin\LoginControlFactory;
 use Nette\Application\UI\Presenter;
 
 
 class SignPresenter extends Presenter
 {
 
-    /** @var  ILoginControlFactory @inject */
+    /** @var  LoginControlFactory @inject */
     public $loginControlFactory;
 
 
