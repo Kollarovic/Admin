@@ -82,13 +82,13 @@ class Extension extends Nette\DI\CompilerExtension
 			$loaderFactory->addSetup('addFile', [$file]);
 		}
 
-		$builder->addDefinition($this->prefix('formRender'))
+		$builder->addDefinition($this->prefix('formRenderer'))
 			->setFactory(Bs3FormRenderer::class)
 			->setAutowired(false);
 
 		$builder->addDefinition($this->prefix('baseFormFactory'))
 			->setFactory(BaseFormFactory::class, [
-				'formRender' => $this->prefix('@formRender'),
+				'formRenderer' => $this->prefix('@formRenderer'),
 			]);
 
 		$builder->addDefinition($this->prefix('loginFormFactory'))
