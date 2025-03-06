@@ -7,7 +7,7 @@ namespace Kollarovic\Admin\Loader;
 use Nette\Application\UI\Control;
 
 
-class LoaderFactory implements ILoaderFactory
+class DefaultLoaderFactory implements ILoaderFactory
 {
 	/** @var array<string, string> */
 	private array $files = [];
