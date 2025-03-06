@@ -15,10 +15,8 @@ use Kollarovic\Navigation\PanelControl;
 use Kollarovic\Navigation\TitleControl;
 use Nette\Application\UI\Control;
 use Nette\Application\UI\Form;
-use Nette\Bridges\ApplicationLatte\Template;
 use Nette\Localization\Translator;
 use Nette\Security\User;
-use Nette\UnexpectedValueException;
 use ReflectionClass;
 
 
