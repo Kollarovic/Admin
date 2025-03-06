@@ -127,13 +127,13 @@ class LoginControl extends Control
 	}
 
 
-	public function getPageName(): ?string
+	public function getPageName(): string
 	{
 		return $this->pageName;
 	}
 
 
-	public function setPageName(?string $pageName): static
+	public function setPageName(string $pageName): static
 	{
 		$this->pageName = $pageName;
 		return $this;
