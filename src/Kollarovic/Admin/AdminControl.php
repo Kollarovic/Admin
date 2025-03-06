@@ -22,6 +22,9 @@ use Nette\UnexpectedValueException;
 use ReflectionClass;
 
 
+/**
+ * @property-read AdminTemplate $template
+ */
 class AdminControl extends Control
 {
 	/** @var array<callable(self): void> */
