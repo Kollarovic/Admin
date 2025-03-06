@@ -12,8 +12,8 @@ use Nette\Localization\Translator;
 class BaseFormFactory implements IBaseFormFactory
 {
 	public function __construct(
-		private FormRenderer $formRender,
-		private ?Translator $translator = null
+		private FormRenderer $formRenderer,
+		private ?Translator  $translator = null
 	) {
 	}
 
@@ -22,7 +22,7 @@ class BaseFormFactory implements IBaseFormFactory
 	{
 		$form = new Form;
 		$form->setTranslator($this->translator);
-		$form->setRenderer($this->formRender);
+		$form->setRenderer($this->formRenderer);
 		return $form;
 	}
 }
