@@ -8,7 +8,7 @@ use Kollarovic\Admin\Form\BaseFormFactory;
 use Kollarovic\Admin\Form\LoginFormFactory;
 use Kollarovic\Admin\AdminControlFactory;
 use Kollarovic\Admin\LoginControlFactory;
-use Kollarovic\Admin\Loader\LoaderFactory;
+use Kollarovic\Admin\Loader\DefaultLoaderFactory;
 use Nette;
 use Nette\DI\ContainerBuilder;
 use Nextras\FormsRendering\Renderers\Bs3FormRenderer;
@@ -75,7 +75,7 @@ class Extension extends Nette\DI\CompilerExtension
 		$config = $this->validateConfig($this->getDefaultConfig($builder));
 
 		$loaderFactory = $builder->addDefinition($this->prefix('loaderFactory'))
-			->setFactory(LoaderFactory::class);
+			->setFactory(DefaultLoaderFactory::class);
 
 		$defaultFiles = $config['defaultFiles'][$config['templateType']];
 		foreach (array_merge($defaultFiles, $config['files']) as $file) {
