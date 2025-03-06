@@ -9,8 +9,8 @@ use Nette\Bridges\ApplicationLatte\Template;
 
 class LoginTemplate extends Template
 {
-	public string $pageName;
-	public string $pageTitle;
-	public string $pageMsg;
 	public string $basePath;
+	public string $pageTitle;
+	public string $pageName;
+	public ?string $pageMsg;
 }

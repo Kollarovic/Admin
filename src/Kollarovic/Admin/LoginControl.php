@@ -22,7 +22,7 @@ class LoginControl extends Control
 	private string $templateType = 'AdminLte2';
 	private ?string $templateFile = null;
 	private string $pageTitle = 'Login - Admin';
-	private ?string $pageName = 'Admin';
+	private string $pageName = 'Admin';
 	private ?string $pageMsg = null;
 
 
@@ -146,7 +146,7 @@ class LoginControl extends Control
 	}
 
 
-	public function setPageMsg(string $pageMsg): self
+	public function setPageMsg(?string $pageMsg): self
 	{
 		$this->pageMsg = $pageMsg;
 		return $this;
