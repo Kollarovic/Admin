@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Kollarovic\Admin\DI;
 
 use Kollarovic\Admin\Form\BaseFormFactory;
+use Kollarovic\Admin\Form\LoginFormFactory;
 use Kollarovic\Admin\IAdminControlFactory;
 use Kollarovic\Admin\ILoginControlFactory;
 use Kollarovic\Admin\LoaderFactory;
-use Kollarovic\Admin\LoginFormFactory;
 use Nette;
 use Nette\DI\ContainerBuilder;
 use Nextras\FormsRendering\Renderers\Bs3FormRenderer;

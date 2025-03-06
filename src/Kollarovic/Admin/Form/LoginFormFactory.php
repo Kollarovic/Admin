@@ -2,9 +2,8 @@
 
 declare(strict_types=1);
 
-namespace Kollarovic\Admin;
+namespace Kollarovic\Admin\Form;
 
-use Kollarovic\Admin\Form\IBaseFormFactory;
 use Nette\Application\UI\Form;
 use Nette\Security\AuthenticationException;
 use Nette\Security\User;
