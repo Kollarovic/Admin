@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Kollarovic\Admin;
 
 
-interface IAdminControlFactory
+interface AdminControlFactory
 {
 	function create(): AdminControl;
 }

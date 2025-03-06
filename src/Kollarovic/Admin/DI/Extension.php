@@ -6,7 +6,7 @@ namespace Kollarovic\Admin\DI;
 
 use Kollarovic\Admin\Form\BaseFormFactory;
 use Kollarovic\Admin\Form\LoginFormFactory;
-use Kollarovic\Admin\IAdminControlFactory;
+use Kollarovic\Admin\AdminControlFactory;
 use Kollarovic\Admin\ILoginControlFactory;
 use Kollarovic\Admin\Loader\LoaderFactory;
 use Nette;
@@ -103,7 +103,7 @@ class Extension extends Nette\DI\CompilerExtension
 			->addSetup('setPageMsg', [$config['login']['pageMsg']]);
 
 		$builder->addFactoryDefinition($this->prefix('adminControlFactory'))
-			->setImplement(IAdminControlFactory::class)
+			->setImplement(AdminControlFactory::class)
 			->getResultDefinition()
 			->addSetup('setTemplateType', [$config['templateType']])
 			->addSetup('setSkin', [$config['skin']])

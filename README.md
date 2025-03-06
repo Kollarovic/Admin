@@ -54,13 +54,13 @@ BasePresenter
 namespace App\BackendModule\Presenters;
 
 use Nette\Application\UI\Presenter;
-use Kollarovic\Admin\IAdminControlFactory;
+use Kollarovic\Admin\AdminControlFactory;
 
 
 abstract class BasePresenter extends Presenter
 {
 
-    /** @var IAdminControlFactory @inject */
+    /** @var AdminControlFactory @inject */
     public $adminControlFactory;
 
     protected function createComponentAdminControl()

@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Kollarovic\Admin\Test;
 
-use Kollarovic\Admin\IAdminControlFactory;
+use Kollarovic\Admin\AdminControlFactory;
 use Kollarovic\Admin\ILoginControlFactory;
 use Nette\Application\UI\InvalidLinkException;
 use Nette\Application\UI\Presenter;
@@ -13,7 +13,7 @@ use Nette\Security\Identity;
 class MockPresenter extends Presenter
 {
 
-	/** @var IAdminControlFactory @inject */
+	/** @var AdminControlFactory @inject */
 	public $adminControlFactory;
 
 	/** @var  ILoginControlFactory @inject */
