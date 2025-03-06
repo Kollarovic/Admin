@@ -18,8 +18,8 @@ class AdminTemplate extends Template
 	public string $basePath;
 	public string $adminName;
 	public string $adminShortName;
-	public string $pageName;
-	public string $pageTitle;
+	public ?string $pageName;
+	public ?string $pageTitle;
 	public string $skin;
 	public string $userName;
 	public ?string $userImage;

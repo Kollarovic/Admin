@@ -33,13 +33,13 @@ class AdminControl extends Control
 
 	private string $templateType = 'AdminLte2';
 	private ?string $templateFile = null;
-	private string $pageTitle = 'Admin';
+	private ?string $pageTitle = null;
 	private string $skin = 'red';
 	private string $adminName = 'Admin';
 	private string $adminShortName = 'A';
 	private string $userName = 'Admin';
 	private ?string $userImage = null;
-	private string $pageName = 'Admin';
+	private ?string $pageName = null;
 	private ?string $content = null;
 	private ?string $header = null;
 	private ?string $footer = null;
@@ -216,13 +216,13 @@ class AdminControl extends Control
 	}
 
 
-	public function getPageTitle(): string
+	public function getPageTitle(): ?string
 	{
 		return $this->pageTitle;
 	}
 
 
-	public function setPageTitle(string $pageTitle): self
+	public function setPageTitle(?string $pageTitle): self
 	{
 		$this->pageTitle = $pageTitle;
 		return $this;
@@ -294,13 +294,13 @@ class AdminControl extends Control
 	}
 
 
-	public function getPageName(): string
+	public function getPageName(): ?string
 	{
 		return $this->pageName;
 	}
 
 
-	public function setPageName(string $pageName): self
+	public function setPageName(?string $pageName): self
 	{
 		$this->pageName = $pageName;
 		return $this;
