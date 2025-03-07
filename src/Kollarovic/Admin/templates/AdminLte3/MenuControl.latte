@@ -1,0 +1,35 @@
+{var $level = 0}
+
+{define link}
+	<a n:class="$ajax ? ajax, nav-link" href="{$item->isUrl() ? $item->getLink() : $presenter->link($item->getLink(), $item->getLinkArgs())}">
+		<i n:if="$item->getIcon()" class="nav-icon fas {$item->getIcon()}"></i>
+		<p>
+			{_$item->getLabel()}
+			{if $item->getOption(label)}
+				<span class="badge badge-{$item->getOption(labelColor, 'danger')} right">{$item->getOption(label)}</span>
+			{elseif $item->isDropdown()}
+				<i class="right fas fa-angle-left"></i>
+			{/if}
+		</p>
+	</a>
+{/define}
+
+{define item}
+	{if $item->isActive() and (!$item->getResource() or $user->isAllowed($item->getResource()))}
+		<li n:class="nav-item, $item->isCurrent() ? $activeClass, $item->isOpen() ? 'menu-open', $item->isDropdown() ? 'has-treeview'">
+			{include link, item}
+			<ul class="nav nav-treeview" n:if="$item->isDropdown() and ($deep > $level or $deep === true) and ($item->isCurrent() or $item->isOpen() or $open)">
+				{var $level = $level + 1}
+				{foreach $item->getItems() as $subitem}
+					{include item, item => $subitem}
+				{/foreach}
+			</ul>
+		</li>
+	{/if}
+{/define}
+
+<ul class="nav nav-pills nav-sidebar flex-column" n:if="$items" data-widget="treeview" role="menu" data-accordion="false">
+	{foreach $items as $item}
+		{include item, item => $item}
+	{/foreach}
+</ul>

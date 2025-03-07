@@ -1,0 +1,20 @@
+{var $colors = ['primary', 'success', 'warning', 'danger', 'info', 'secondary', 'teal', 'maroon', 'dark']}
+{var $index = 0}
+
+<div class="row" n:inner-foreach="$items as $item">
+	<div n:if="!$item->getResource() or $user->isAllowed($item->getResource())" class="col-6 col-lg-3">
+		{var $index = $index > 8 ? 0 : $index}
+		<div class="small-box bg-{$colors[$index++]}">
+			<div class="inner">
+				<h3>{$item->getValue()|noescape}&nbsp;</h3>
+				<p>{_$item->getLabel()}</p>
+			</div>
+			<div class="icon">
+				<i class="fas {$item->getIcon() ? $item->getIcon() : 'fa-file-alt'}"></i>
+			</div>
+			<a n:class="$ajax ? ajax,small-box-footer" href="{$item->isUrl() ? $item->getLink() : $presenter->link($item->getLink(), $item->getLinkArgs())}">
+				{_'Show'} <i class="fas fa-arrow-circle-right"></i>
+			</a>
+		</div>
+	</div>
+</div>

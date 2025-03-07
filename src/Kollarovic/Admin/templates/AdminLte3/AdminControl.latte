@@ -1,0 +1,135 @@
+{templateType Kollarovic\Admin\AdminTemplate}
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+	{if $pageTitle}
+		<title>{$pageTitle}</title>
+	{else}
+		<title>{control title} - {_$adminName}</title>
+	{/if}
+
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+	{control css}
+
+	{if $header}
+		{_$header|noescape}
+	{/if}
+
+</head>
+<body class="hold-transition sidebar-mini layout-fixed {if $sidebarCollapse}sidebar-collapse{/if}">
+
+<div class="wrapper">
+
+	<nav class="main-header navbar navbar-expand navbar-white navbar-light">
+
+		<ul class="navbar-nav">
+			<li class="nav-item">
+				<a class="nav-link" data-widget="pushmenu" href="#" role="button">
+					<i class="fas fa-bars"></i>
+				</a>
+			</li>
+		</ul>
+
+		<ul class="navbar-nav ml-auto">
+			{$navbar|noescape}
+
+			<li class="nav-item dropdown user-menu" n:if="$user->identity">
+				<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+					<i class="fas fw fa-user"></i>
+					<span class="d-none d-md-inline">{$userName}</span>
+					<i class="fas fa-caret-down"></i>
+				</a>
+				<ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+					<!-- User image -->
+					<li class="user-header bg-primary">
+						<img src="{$basePath}/{$userImage}" class="img-circle" alt="User Image"/>
+						<p>
+							{$userName}
+						</p>
+					</li>
+					<li class="user-footer">
+						<a n:if="$profileUrl" href="{$profileUrl}" class="btn btn-default btn-flat">{_'Profile'}</a>
+						<a n:href="signOut"  class="btn btn-default btn-flat float-right">{_'Sign out'}</a>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</nav>
+
+	<aside class="main-sidebar sidebar-dark-primary elevation-4">
+		<a href="{plink $rootItem->getLink()}" n:class="brand-link,$ajax ? ajax">
+			<span class="brand-text font-weight-light">{_$adminName}</span>
+		</a>
+
+		<div class="sidebar">
+			{if $showSearchForm}
+				{form searchForm class=>'form-inline mt-3 mb-3'}
+					<div class="input-group">
+						<input type="text" n:name="key" class="form-control form-control-sidebar" placeholder="{_'Search'}"/>
+						<div class="input-group-append">
+							<button type='submit' class="btn btn-sidebar">
+								<i class="fas fa-search fa-fw"></i>
+							</button>
+						</div>
+					</div>
+				{/form}
+			{/if}
+			<nav class="mt-2">
+
+				{snippet menu}
+					{block menu}
+						{control menu class => 'nav nav-pills nav-sidebar flex-column', subclass => 'nav-treeview', openClass => 'menu-open', dropdownClass => 'nav-item', open => true, ajax => $ajax}
+					{/block}
+				{/snippet}
+			</nav>
+		</div>
+	</aside>
+
+	<div class="content-wrapper">
+
+		<div class="content-header" n:snippet="breadcrumb">
+			<div class="container-fluid">
+				<div class="row mb-2">
+					<div class="col-sm-6">
+						<h1 class="m-0">{if $pageName}{$pageName}{else}{control title}{/if}</h1>
+					</div>
+					<div class="col-sm-6">
+						{block breadcrumb}{control breadcrumb ajax => $ajax}{/block}
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<section class="content">
+			<div class="container-fluid">
+				{snippet flash}
+					<div n:foreach="$presenter->template->flashes as $flash" class="alert alert-{$flash->type} fade show" n:block="flashes">
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+						{_$flash->message}
+					</div>
+				{/snippet}
+				{$content|noescape}
+			</div>
+		</section>
+
+	</div>
+
+	<footer class="main-footer" n:block="footer">
+		{if $footer}
+			{_$footer|noescape}
+		{/if}
+	</footer>
+
+</div>
+
+{block scripts}
+	{control js}
+{/block}
+
+</body>
+</html>

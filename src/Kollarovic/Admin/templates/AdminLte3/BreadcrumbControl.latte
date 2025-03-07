@@ -1,0 +1,7 @@
+<ol class="breadcrumb float-sm-right" n:if="$items" n:inner-foreach="$items as $item">
+	<li n:class="breadcrumb-item, $iterator->last ? active">
+		<a n:tag-if="!$iterator->last" n:class="$ajax ? ajax" href="{$item->isUrl() ? $item->getLink() : $presenter->link($item->getLink(), $item->getLinkArgs())}">
+			{_$item->getLabel()}
+		</a>
+	</li>
+</ol>
