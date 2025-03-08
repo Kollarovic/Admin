@@ -45,7 +45,6 @@
 					<i class="fas fa-caret-down"></i>
 				</a>
 				<ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-					<!-- User image -->
 					<li class="user-header bg-primary">
 						<img src="{$basePath}/{$userImage}" class="img-circle" alt="User Image"/>
 						<p>
@@ -62,7 +61,7 @@
 	</nav>
 
 	<aside class="main-sidebar sidebar-dark-primary elevation-4">
-		<a href="{plink $rootItem->getLink()}" n:class="brand-link,$ajax ? ajax">
+		<a href="{plink $rootItem->getLink()}" n:class="brand-link, $ajax ? ajax">
 			<span class="brand-text font-weight-light">{_$adminName}</span>
 		</a>
 
@@ -79,14 +78,15 @@
 					</div>
 				{/form}
 			{/if}
-			<nav class="mt-2">
 
+			<nav class="mt-2">
 				{snippet menu}
 					{block menu}
-						{control menu class => 'nav nav-pills nav-sidebar flex-column', subclass => 'nav-treeview', openClass => 'menu-open', dropdownClass => 'nav-item', open => true, ajax => $ajax}
+						{control menu open => true, ajax => $ajax}
 					{/block}
 				{/snippet}
 			</nav>
+
 		</div>
 	</aside>
 
