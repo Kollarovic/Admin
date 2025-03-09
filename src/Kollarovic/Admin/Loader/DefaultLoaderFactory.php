@@ -9,20 +9,20 @@ use Nette\Application\UI\Control;
 
 class DefaultLoaderFactory implements LoaderFactory
 {
-	/** @var array<string, string> */
+	/** @var array<string, array<string, string>> */
 	private array $files = [];
 
 
-	public function addFile(string $file): static
+	public function addFile(string $name, string $file): static
 	{
-		$this->files[$file] = $file;
+		$this->files[$name][$file] = $file;
 		return $this;
 	}
 
 
-	public function removeFile(string $file): static
+	public function removeFile(string $name, string $file): static
 	{
-		unset($this->files[$file]);
+		unset($this->files[$name][$file]);
 		return $this;
 	}
 
@@ -30,22 +30,22 @@ class DefaultLoaderFactory implements LoaderFactory
 	/**
 	 * @return array<string, string>
 	 */
-	public function getFiles(): array
+	public function getFiles(string $name): array
 	{
-		return $this->files;
+		return $this->files[$name] ?? [];
 	}
 
 
-	public function createCssLoader(): Control
+	public function createCssLoader(string $name): Control
 	{
-		$files = array_filter($this->files, [$this, 'isCss']);
+		$files = array_filter($this->getFiles($name), [$this, 'isCss']);
 		return new CssControl($files);
 	}
 
 
-	public function createJavaScriptLoader(): Control
+	public function createJavaScriptLoader(string $name): Control
 	{
-		$files = array_filter($this->files, [$this, 'isJs']);
+		$files = array_filter($this->getFiles($name), [$this, 'isJs']);
 		return new JsControl($files);
 	}
 

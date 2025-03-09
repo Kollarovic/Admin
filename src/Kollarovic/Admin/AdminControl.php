@@ -160,13 +160,13 @@ class AdminControl extends Control
 
 	protected function createComponentCss(): Control
 	{
-		return $this->loaderFactory->createCssLoader();
+		return $this->loaderFactory->createCssLoader($this->templateType);
 	}
 
 
 	protected function createComponentJs(): Control
 	{
-		return $this->loaderFactory->createJavaScriptLoader();
+		return $this->loaderFactory->createJavaScriptLoader($this->templateType);
 	}
 
 

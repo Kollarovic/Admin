@@ -9,7 +9,7 @@ use Nette\Application\UI\Control;
 
 interface LoaderFactory
 {
-	function createCssLoader(): Control;
+	function createCssLoader(string $name): Control;
 
-	function createJavaScriptLoader(): Control;
+	function createJavaScriptLoader(string $name): Control;
 }

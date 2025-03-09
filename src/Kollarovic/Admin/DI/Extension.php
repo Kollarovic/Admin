@@ -77,9 +77,10 @@ class Extension extends Nette\DI\CompilerExtension
 		$loaderFactory = $builder->addDefinition($this->prefix('loaderFactory'))
 			->setFactory(DefaultLoaderFactory::class);
 
-		$defaultFiles = $config['defaultFiles'][$config['templateType']];
-		foreach (array_merge($defaultFiles, $config['files']) as $file) {
-			$loaderFactory->addSetup('addFile', [$file]);
+		foreach ($config['defaultFiles'] as $name => $files) {
+			foreach ($files as $file) {
+				$loaderFactory->addSetup('addFile', [$name, $file]);
+			}
 		}
 
 		$builder->addDefinition($this->prefix('formRenderer'))
