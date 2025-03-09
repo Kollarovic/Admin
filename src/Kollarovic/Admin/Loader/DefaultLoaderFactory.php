@@ -13,14 +13,14 @@ class DefaultLoaderFactory implements LoaderFactory
 	private array $files = [];
 
 
-	public function addFile(string $file): self
+	public function addFile(string $file): static
 	{
 		$this->files[$file] = $file;
 		return $this;
 	}
 
 
-	public function removeFile(string $file): self
+	public function removeFile(string $file): static
 	{
 		unset($this->files[$file]);
 		return $this;
