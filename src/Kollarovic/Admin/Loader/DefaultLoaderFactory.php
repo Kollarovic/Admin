@@ -13,14 +13,14 @@ class DefaultLoaderFactory implements LoaderFactory
 	private array $files = [];
 
 
-	public function addFile(string $name, string $file): static
+	public function addFile(?string $name, string $file): static
 	{
 		$this->files[$name][$file] = $file;
 		return $this;
 	}
 
 
-	public function removeFile(string $name, string $file): static
+	public function removeFile(?string $name, string $file): static
 	{
 		unset($this->files[$name][$file]);
 		return $this;
@@ -32,7 +32,9 @@ class DefaultLoaderFactory implements LoaderFactory
 	 */
 	public function getFiles(string $name): array
 	{
-		return $this->files[$name] ?? [];
+		$globalFiles = $this->files[null] ?? [];
+		$specificFiles = $this->files[$name] ?? [];
+		return $globalFiles + $specificFiles;
 	}
 
 
