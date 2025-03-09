@@ -77,9 +77,13 @@ class Extension extends Nette\DI\CompilerExtension
 		$loaderFactory = $builder->addDefinition($this->prefix('loaderFactory'))
 			->setFactory(DefaultLoaderFactory::class);
 
-		foreach ($config['defaultFiles'] as $name => $files) {
-			foreach ($files as $file) {
-				$loaderFactory->addSetup('addFile', [$name, $file]);
+		foreach (array_merge($config['defaultFiles'], $config['files']) as $name => $value) {
+			if (is_array($value)) {
+				foreach ($value as $file) {
+					$loaderFactory->addSetup('addFile', [$name, $file]);
+				}
+			} else {
+				$loaderFactory->addSetup('addFile', [null, $value]);
 			}
 		}
 
