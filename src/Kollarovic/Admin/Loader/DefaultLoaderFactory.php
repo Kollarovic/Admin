@@ -52,7 +52,7 @@ class DefaultLoaderFactory implements LoaderFactory
 
 	private function isCss(string $file): bool
 	{
-		return (bool) preg_match('~\.css$~', $file);
+		return (bool) preg_match('~\.css$|/css\?~', $file);
 	}
 
 
