@@ -34,6 +34,7 @@ class Extension extends Nette\DI\CompilerExtension
 		];
 
 		$adminLte3Files = [
+			'https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback',
 			'https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css',
 			'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css',
 			'https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css',
