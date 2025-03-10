@@ -31,7 +31,7 @@ class AdminControl extends Control
 	/** @var array<callable(self): void> */
 	public array $onSearch = [];
 
-	private string $templateType = 'AdminLte2';
+	private TemplateType $templateType = TemplateType::AdminLte2;
 	private ?string $templateFile = null;
 	private ?string $pageTitle = null;
 	private string $skin = 'red';
@@ -64,13 +64,13 @@ class AdminControl extends Control
 	 ********************************************************************************/
 
 
-	public function getTemplateType(): string
+	public function getTemplateType(): TemplateType
 	{
 		return $this->templateType;
 	}
 
 
-	public function setTemplateType(string $templateType): static
+	public function setTemplateType(TemplateType $templateType): static
 	{
 		$this->templateType = $templateType;
 		return $this;
@@ -160,13 +160,13 @@ class AdminControl extends Control
 
 	protected function createComponentCss(): Control
 	{
-		return $this->loaderFactory->createCssLoader($this->templateType);
+		return $this->loaderFactory->createCssLoader($this->templateType->value);
 	}
 
 
 	protected function createComponentJs(): Control
 	{
-		return $this->loaderFactory->createJavaScriptLoader($this->templateType);
+		return $this->loaderFactory->createJavaScriptLoader($this->templateType->value,);
 	}
 
 
@@ -413,7 +413,7 @@ class AdminControl extends Control
 
 	private function buildTemplateFilePath(string $componentName): string
 	{
-		return __DIR__ . "/templates/{$this->templateType}/{$componentName}.latte";
+		return __DIR__ . "/templates/{$this->templateType->value}/{$componentName}.latte";
 	}
 
 }

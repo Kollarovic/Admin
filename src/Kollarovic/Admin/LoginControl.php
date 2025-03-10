@@ -19,7 +19,7 @@ class LoginControl extends Control
 {
 	/** @var array<callable(self): void> */
 	public array $onLoggedIn = [];
-	private string $templateType = 'AdminLte2';
+	private TemplateType $templateType = TemplateType::AdminLte2;
 	private ?string $templateFile = null;
 	private string $pageTitle = 'Login - Admin';
 	private string $pageName = 'Admin';
@@ -39,13 +39,13 @@ class LoginControl extends Control
 	 ********************************************************************************/
 
 
-	public function getTemplateType(): string
+	public function getTemplateType(): TemplateType
 	{
 		return $this->templateType;
 	}
 
 
-	public function setTemplateType(string $templateType): self
+	public function setTemplateType(TemplateType $templateType): self
 	{
 		$this->templateType = $templateType;
 		return $this;
@@ -54,7 +54,7 @@ class LoginControl extends Control
 
 	public function getTemplateFile(): string
 	{
-		return $this->templateFile ?? __DIR__ . "/templates/{$this->templateType}/LoginControl.latte";
+		return $this->templateFile ?? __DIR__ . "/templates/{$this->templateType->value}/LoginControl.latte";
 	}
 
 
@@ -100,13 +100,13 @@ class LoginControl extends Control
 
 	protected function createComponentCss(): Control
 	{
-		return $this->loaderFactory->createCssLoader($this->templateType);
+		return $this->loaderFactory->createCssLoader($this->templateType->value);
 	}
 
 
 	protected function createComponentJs(): Control
 	{
-		return $this->loaderFactory->createJavaScriptLoader($this->templateType);
+		return $this->loaderFactory->createJavaScriptLoader($this->templateType->value);
 	}
 
 

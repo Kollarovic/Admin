@@ -9,6 +9,7 @@ use Kollarovic\Admin\Form\DefaultLoginFormFactory;
 use Kollarovic\Admin\AdminControlFactory;
 use Kollarovic\Admin\LoginControlFactory;
 use Kollarovic\Admin\Loader\DefaultLoaderFactory;
+use Kollarovic\Admin\TemplateType;
 use Nette;
 use Nette\DI\ContainerBuilder;
 use Nextras\FormsRendering\Renderers\Bs3FormRenderer;
@@ -48,7 +49,7 @@ class Extension extends Nette\DI\CompilerExtension
 		return [
 			'name' => 'Admin',
 			'shortName' => 'A',
-			'templateType' => 'AdminLte2',
+			'templateType' => TemplateType::AdminLte2,
 			'skin' => 'red',
 			'header' => '',
 			'footer' => '',
@@ -99,10 +100,13 @@ class Extension extends Nette\DI\CompilerExtension
 		$builder->addDefinition($this->prefix('loginFormFactory'))
 			->setFactory(DefaultLoginFormFactory::class, ['useEmail' => $config['login']['email']]);
 
+		$templateType = $config['templateType'];
+		$templateType = $templateType instanceof TemplateType ? $templateType : TemplateType::from($templateType);
+
 		$builder->addFactoryDefinition($this->prefix('loginControlFactory'))
 			->setImplement(LoginControlFactory::class)
 			->getResultDefinition()
-			->addSetup('setTemplateType', [$config['templateType']])
+			->addSetup('setTemplateType', [$templateType])
 			->addSetup('setPageTitle', [$config['login']['pageTitle']])
 			->addSetup('setPageName', [$config['login']['pageName']])
 			->addSetup('setPageMsg', [$config['login']['pageMsg']]);
@@ -110,7 +114,7 @@ class Extension extends Nette\DI\CompilerExtension
 		$builder->addFactoryDefinition($this->prefix('adminControlFactory'))
 			->setImplement(AdminControlFactory::class)
 			->getResultDefinition()
-			->addSetup('setTemplateType', [$config['templateType']])
+			->addSetup('setTemplateType', [$templateType])
 			->addSetup('setSkin', [$config['skin']])
 			->addSetup('setAdminName', [$config['name']])
 			->addSetup('setAdminShortName', [$config['shortName']])
