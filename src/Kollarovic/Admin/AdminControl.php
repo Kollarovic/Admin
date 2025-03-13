@@ -166,7 +166,7 @@ class AdminControl extends Control
 
 	protected function createComponentJs(): Control
 	{
-		return $this->loaderFactory->createJavaScriptLoader($this->templateType->value,);
+		return $this->loaderFactory->createJavaScriptLoader($this->templateType->value);
 	}
 
 
