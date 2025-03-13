@@ -51,10 +51,10 @@ class AdminControl extends Control
 
 
 	public function __construct(
-		private ItemsFactory  $itemsFactory,
+		private ItemsFactory $itemsFactory,
 		private LoaderFactory $loaderFactory,
-		private User          $user,
-		private ?Translator   $translator = null
+		private User $user,
+		private Translator $translator = new FallbackTranslator()
 	) {
 	}
 
