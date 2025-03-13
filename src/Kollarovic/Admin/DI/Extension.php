@@ -101,7 +101,7 @@ class Extension extends Nette\DI\CompilerExtension
 			->setFactory(DefaultLoginFormFactory::class, ['useEmail' => $config['login']['email']]);
 
 		$templateType = $config['templateType'];
-		$templateType = $templateType instanceof TemplateType ? $templateType : TemplateType::from($templateType);
+		$templateType = is_string($templateType) ? TemplateType::from($templateType) : $templateType;
 
 		$builder->addFactoryDefinition($this->prefix('loginControlFactory'))
 			->setImplement(LoginControlFactory::class)
