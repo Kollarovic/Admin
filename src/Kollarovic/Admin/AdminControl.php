@@ -95,7 +95,7 @@ class AdminControl extends Control
 	 */
 	public function render(array $options = []): void
 	{
-		$this->template->setTranslator($this->translator ?? new FallbackTranslator());
+		$this->template->setTranslator($this->translator);
 		$this->template->setFile($this->getTemplateFile());
 		$this->template->pageTitle = $this->pageTitle;
 		$this->template->skin = $this->skin;
