@@ -32,3 +32,9 @@ admin:
 		pageName: Admin
 		pageMsg: Authentication
 		email: true
+	icons:
+		AdminLte2:
+			default: fa-file-text-o
+		AdminLte3:
+			default: fa-file-alt
+

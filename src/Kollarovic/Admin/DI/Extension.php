@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace Kollarovic\Admin\DI;
 
+use Kollarovic\Admin\AdminItemsFactory;
 use Kollarovic\Admin\Form\BaseFormFactory;
 use Kollarovic\Admin\Form\DefaultLoginFormFactory;
 use Kollarovic\Admin\AdminControlFactory;
+use Kollarovic\Admin\Icon\DefaultIconResolver;
 use Kollarovic\Admin\LoginControlFactory;
 use Kollarovic\Admin\Loader\DefaultLoaderFactory;
 use Kollarovic\Admin\TemplateType;
@@ -33,6 +35,8 @@ class Extension extends CompilerExtension
 	{
 		$builder = $this->getContainerBuilder();
 		$config = $this->validateConfig($this->getDefaultConfig());
+		$templateType = $config['templateType'];
+		$templateType = is_string($templateType) ? TemplateType::from($templateType) : $templateType;
 
 		$loaderFactory = $builder->addDefinition($this->prefix('loaderFactory'))
 			->setFactory(DefaultLoaderFactory::class);
@@ -47,6 +51,20 @@ class Extension extends CompilerExtension
 			}
 		}
 
+		$iconResolverDefinition = $builder->addDefinition($this->prefix('iconResolver'))
+			->setFactory(DefaultIconResolver::class);
+
+		foreach ($config['icons'] as $type => $icons) {
+			foreach ($icons as $name => $icon) {
+				$iconResolverDefinition->addSetup('addIcon', [$type, $name, $icon]);
+			}
+		}
+
+		$builder->addDefinition($this->prefix('itemsFactory'))
+			->setFactory(AdminItemsFactory::class)
+			->setAutowired(false)
+			->addSetup('setTemplateType', [$templateType]);
+
 		$builder->addDefinition($this->prefix('formRenderer'))
 			->setFactory(Bs3FormRenderer::class)
 			->setAutowired(false);
@@ -59,9 +77,6 @@ class Extension extends CompilerExtension
 		$builder->addDefinition($this->prefix('loginFormFactory'))
 			->setFactory(DefaultLoginFormFactory::class, ['useEmail' => $config['login']['email']]);
 
-		$templateType = $config['templateType'];
-		$templateType = is_string($templateType) ? TemplateType::from($templateType) : $templateType;
-
 		$builder->addFactoryDefinition($this->prefix('loginControlFactory'))
 			->setImplement(LoginControlFactory::class)
 			->getResultDefinition()
@@ -73,6 +88,7 @@ class Extension extends CompilerExtension
 		$builder->addFactoryDefinition($this->prefix('adminControlFactory'))
 			->setImplement(AdminControlFactory::class)
 			->getResultDefinition()
+			->setArgument('itemsFactory', $this->prefix('@itemsFactory'))
 			->addSetup('setTemplateType', [$templateType])
 			->addSetup('setSkin', [$config['skin']])
 			->addSetup('setAdminName', [$config['name']])
