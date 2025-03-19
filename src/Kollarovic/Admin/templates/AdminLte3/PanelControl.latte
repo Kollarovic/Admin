@@ -10,7 +10,7 @@
 				<p>{_$item->getLabel()}</p>
 			</div>
 			<div class="icon">
-				<i class="fas {$item->getIcon() ? $item->getIcon() : 'fa-file-alt'}"></i>
+				<i class="{$item->getIcon()}"></i>
 			</div>
 			<a n:class="$ajax ? ajax,small-box-footer" href="{$item->isUrl() ? $item->getLink() : $presenter->link($item->getLink(), $item->getLinkArgs())}">
 				{_'Show'} <i class="fas fa-arrow-circle-right"></i>
