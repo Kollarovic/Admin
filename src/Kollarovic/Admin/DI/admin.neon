@@ -36,5 +36,5 @@ admin:
 		AdminLte2:
 			default: fa-file-text-o
 		AdminLte3:
-			default: fa-file-alt
+			default: fas fa-file-alt
 
