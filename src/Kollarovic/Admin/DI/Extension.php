@@ -10,70 +10,29 @@ use Kollarovic\Admin\AdminControlFactory;
 use Kollarovic\Admin\LoginControlFactory;
 use Kollarovic\Admin\Loader\DefaultLoaderFactory;
 use Kollarovic\Admin\TemplateType;
-use Nette;
-use Nette\DI\ContainerBuilder;
+use Nette\DI\CompilerExtension;
+use Nette\Neon\Exception;
 use Nextras\FormsRendering\Renderers\Bs3FormRenderer;
+use Nette\Neon\Neon;
 
 
-class Extension extends Nette\DI\CompilerExtension
+class Extension extends CompilerExtension
 {
 
 	/**
 	 * @return array<string, mixed>
+	 * @throws Exception
 	 */
-	private function getDefaultConfig(ContainerBuilder $builder): array
+	private function getDefaultConfig(): array
 	{
-		$adminLte2Files = [
-			'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css',
-			'https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css',
-			'https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.4.10/css/AdminLTE.min.css',
-			'https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.4.10/css/skins/_all-skins.min.css',
-
-			'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js',
-			'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js',
-			'https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.4.10/js/adminlte.min.js',
-		];
-
-		$adminLte3Files = [
-			'https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback',
-			'https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css',
-			'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css',
-			'https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css',
-			'https://cdn.jsdelivr.net/npm/admin-lte@3.2/plugins/icheck-bootstrap/icheck-bootstrap.min.css',
-
-			'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js',
-			'https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js',
-			'https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js',
-		];
-
-		return [
-			'name' => 'Admin',
-			'shortName' => 'A',
-			'templateType' => TemplateType::AdminLte2,
-			'skin' => 'red',
-			'header' => '',
-			'footer' => '',
-			'ajax' => false,
-			'defaultFiles' => [
-				'AdminLte2' => $adminLte2Files,
-				'AdminLte3' => $adminLte3Files,
-			],
-			'files' => [],
-			'navigation' => 'admin',
-			'login' => [
-				'pageTitle' => 'Login - Admin',
-				'pageName' => 'Admin',
-				'pageMsg' => 'Authentication',
-				'email' => true,
-			],
-		];
+		return Neon::decodeFile(__DIR__ . '/admin.neon')['admin'];
 	}
 
 
 	public function loadConfiguration(): void
 	{
 		$builder = $this->getContainerBuilder();
-		$config = $this->validateConfig($this->getDefaultConfig($builder));
+		$config = $this->validateConfig($this->getDefaultConfig());
 
 		$loaderFactory = $builder->addDefinition($this->prefix('loaderFactory'))
 			->setFactory(DefaultLoaderFactory::class);
