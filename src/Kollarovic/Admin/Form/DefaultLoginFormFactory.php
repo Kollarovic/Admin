@@ -40,12 +40,14 @@ class DefaultLoginFormFactory implements LoginFormFactory
 
 		$form->addCheckbox('remember', 'Remember Me');
 		$form->addSubmit('submit', 'Sign In');
-		$form->onSuccess[] = [$this, 'process'];
+		$form->onSuccess[] = function (Form $form, ArrayHash $values): void {
+			$this->process($form, $values);
+		};
 		return $form;
 	}
 
 
-	public function process(Form $form, ArrayHash $values): void
+	private function process(Form $form, ArrayHash $values): void
 	{
 		try {
 			$this->user->setExpiration($values->remember ? '14 days' : null);
