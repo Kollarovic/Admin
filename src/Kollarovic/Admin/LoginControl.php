@@ -19,7 +19,7 @@ class LoginControl extends Control
 {
 	/** @var array<callable(self): void> */
 	public array $onLoggedIn = [];
-	private TemplateType $templateType = TemplateType::AdminLte2;
+	private TemplateType $templateType = TemplateType::DEFAULT;
 	private ?string $templateFile = null;
 	private string $pageTitle = 'Login - Admin';
 	private string $pageName = 'Admin';

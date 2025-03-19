@@ -31,7 +31,7 @@ class AdminControl extends Control
 	/** @var array<callable(self): void> */
 	public array $onSearch = [];
 
-	private TemplateType $templateType = TemplateType::AdminLte2;
+	private TemplateType $templateType = TemplateType::DEFAULT;
 	private ?string $templateFile = null;
 	private ?string $pageTitle = null;
 	private string $skin = 'red';
