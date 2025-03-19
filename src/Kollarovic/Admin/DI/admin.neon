@@ -35,6 +35,11 @@ admin:
 	icons:
 		AdminLte2:
 			default: fa-file-text-o
+			dashboard: fa-dashboard
+			user: fa-user
+			users: fa-users
 		AdminLte3:
 			default: fas fa-file-alt
-
+			dashboard: fas fa-tachometer-alt
+			user: fas fa-user
+			users: fas fa-users
