@@ -4,5 +4,5 @@ namespace Kollarovic\Admin\Icon;
 
 interface IconResolver
 {
-	function resolveIcon(string $type, ?string $name): ?string;
+	function resolveIcon(string $type, ?string $name): string;
 }
