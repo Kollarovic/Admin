@@ -12,8 +12,8 @@ use Nette\Localization\Translator;
 class BaseFormFactory implements FormFactory
 {
 	public function __construct(
-		private FormRenderer $formRenderer,
-		private ?Translator  $translator = null
+		private readonly FormRenderer $formRenderer,
+		private readonly ?Translator $translator = null
 	) {
 	}
 

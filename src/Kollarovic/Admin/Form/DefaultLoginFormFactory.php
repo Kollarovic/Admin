@@ -13,9 +13,9 @@ use Nette\Utils\ArrayHash;
 class DefaultLoginFormFactory implements LoginFormFactory
 {
 	public function __construct(
-		private User        $user,
-		private FormFactory $baseFormFactory,
-		private bool        $useEmail
+		private readonly User $user,
+		private readonly FormFactory $baseFormFactory,
+		private readonly bool $useEmail
 	) {
 	}
 
