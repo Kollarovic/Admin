@@ -13,7 +13,7 @@ class BaseFormFactory implements FormFactory
 {
 	public function __construct(
 		private readonly FormRenderer $formRenderer,
-		private readonly ?Translator $translator = null
+		private readonly ?Translator $translator = null,
 	) {
 	}
 

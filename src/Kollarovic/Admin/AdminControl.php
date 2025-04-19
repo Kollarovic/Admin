@@ -54,7 +54,7 @@ class AdminControl extends Control
 		private ItemsFactory $itemsFactory,
 		private LoaderFactory $loaderFactory,
 		private User $user,
-		private Translator $translator = new FallbackTranslator()
+		private Translator $translator = new FallbackTranslator(),
 	) {
 	}
 
@@ -415,5 +415,4 @@ class AdminControl extends Control
 	{
 		return __DIR__ . "/templates/{$this->templateType->value}/{$componentName}.latte";
 	}
-
 }

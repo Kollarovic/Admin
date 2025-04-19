@@ -15,7 +15,7 @@ class DefaultLoginFormFactory implements LoginFormFactory
 	public function __construct(
 		private readonly User $user,
 		private readonly FormFactory $baseFormFactory,
-		private readonly bool $useEmail
+		private readonly bool $useEmail,
 	) {
 	}
 

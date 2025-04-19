@@ -28,8 +28,8 @@ class LoginControl extends Control
 
 	public function __construct(
 		private LoginFormFactory $loginFormFactory,
-		private LoaderFactory    $loaderFactory,
-		private ?Translator      $translator = null
+		private LoaderFactory $loaderFactory,
+		private ?Translator $translator = null,
 	) {
 	}
 
@@ -152,5 +152,4 @@ class LoginControl extends Control
 		$this->pageMsg = $pageMsg;
 		return $this;
 	}
-
 }

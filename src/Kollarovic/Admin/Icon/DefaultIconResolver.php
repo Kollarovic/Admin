@@ -22,7 +22,7 @@ class DefaultIconResolver implements IconResolver
 
 	public function resolveIcon(string $type, ?string $name): string
 	{
-		$name = $name ?? self::DEFAULT_ICON_NAME;
+		$name ??= self::DEFAULT_ICON_NAME;
 		return $this->icons[$type][$name] ?? $name;
 	}
 }

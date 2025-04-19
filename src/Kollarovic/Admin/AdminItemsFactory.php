@@ -18,7 +18,7 @@ class AdminItemsFactory implements ItemsFactory
 
 	public function __construct(
 		private readonly ItemsFactory $itemsFactory,
-		private readonly IconResolver $iconResolver
+		private readonly IconResolver $iconResolver,
 	) {
 	}
 
@@ -56,5 +56,4 @@ class AdminItemsFactory implements ItemsFactory
 		$resolvedIcon = $this->iconResolver->resolveIcon($this->templateType->value, $item->getIcon());
 		$item->setIcon($resolvedIcon);
 	}
-
 }

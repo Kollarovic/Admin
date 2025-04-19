@@ -4,23 +4,22 @@ declare(strict_types=1);
 
 namespace Kollarovic\Admin\DI;
 
+use Kollarovic\Admin\AdminControlFactory;
 use Kollarovic\Admin\AdminItemsFactory;
 use Kollarovic\Admin\Form\BaseFormFactory;
 use Kollarovic\Admin\Form\DefaultLoginFormFactory;
-use Kollarovic\Admin\AdminControlFactory;
 use Kollarovic\Admin\Icon\DefaultIconResolver;
-use Kollarovic\Admin\LoginControlFactory;
 use Kollarovic\Admin\Loader\DefaultLoaderFactory;
+use Kollarovic\Admin\LoginControlFactory;
 use Kollarovic\Admin\TemplateType;
 use Nette\DI\CompilerExtension;
 use Nette\Neon\Exception;
-use Nextras\FormsRendering\Renderers\Bs3FormRenderer;
 use Nette\Neon\Neon;
+use Nextras\FormsRendering\Renderers\Bs3FormRenderer;
 
 
 class Extension extends CompilerExtension
 {
-
 	/**
 	 * @return array<string, mixed>
 	 * @throws Exception
