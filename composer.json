@@ -21,7 +21,7 @@
 		"nette/forms": "^3.1",
 		"latte/latte": "^3.0",
 		"nextras/forms-rendering": "^2.0@dev",
-		"kollarovic/navigation": "^4.0"
+		"kollarovic/navigation": "dev-master"
 	},
 
 	"require-dev": {
