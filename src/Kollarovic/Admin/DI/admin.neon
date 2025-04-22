@@ -18,10 +18,9 @@ admin:
 
 		AdminLte3:
 			- "https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"
-			- https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css
 			- https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css
 			- https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css
-			- https://cdn.jsdelivr.net/npm/admin-lte@3.2/plugins/icheck-bootstrap/icheck-bootstrap.min.css
+			- https://cdnjs.cloudflare.com/ajax/libs/icheck-bootstrap/3.0.1/icheck-bootstrap.min.css
 			- https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js
 			- https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js
 			- https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js
@@ -38,8 +37,29 @@ admin:
 			dashboard: fa-dashboard
 			user: fa-user
 			users: fa-users
+			orders: fa-shopping-cart
+			categories: fa-list
+			products: fa-cube
+			pages: fa-copy
+			page: fa-file-text-o
+			profile: fa-user
+			settings: fa-cogs
+			stats: fa-bar-chart
+			comments: fa-comments
+			notifications: fa-bell
+
 		AdminLte3:
 			default: fas fa-file-alt
 			dashboard: fas fa-tachometer-alt
 			user: fas fa-user
 			users: fas fa-users
+			orders: fas fa-shopping-cart
+			categories: fas fa-list
+			products: fas fa-box
+			pages: fas fa-copy
+			page: fas fa-file-alt
+			profile: fas fa-user
+			settings: fas fa-cogs
+			stats: fas fa-chart-bar
+			comments: fas fa-comments
+			notifications: fas fa-bell
